@@ -1,0 +1,989 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document><Folder><name>route1</name>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936731342576891,-19.87984824604877 -43.936513746454985,-19.881119130827621</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938062104600959,-19.87997853714154 -43.93805061233062,-19.879977217243653 -43.937478366487682,-19.879907847117643</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937350609498196,-19.879890143067126 -43.936791074219045,-19.879806346324578</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937478366487682,-19.879907847117643 -43.937350609498196,-19.879890143067126</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938136011530474,-19.879903409650019 -43.938376260992008,-19.878888922601995</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938376260992008,-19.878888922601995 -43.938407804013359,-19.878744557799198</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938407803991865,-19.878744557815519 -43.938520051010478,-19.878185811547436</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938716122966063,-19.878008964675146 -43.938712340039856,-19.878013959987634 -43.938675871800037,-19.878049968249233 -43.938670905689627,-19.878053313065589</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939931651504786,-19.877740035152907 -43.939435699986156,-19.877769658394968 -43.939031559148411,-19.877775110838272 -43.93890875403283,-19.877802113050588 -43.938847864816104,-19.877839059916603 -43.938842889505338,-19.877842544260528</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938842889505338,-19.877842544260528 -43.938716122966063,-19.878008964675146</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939994990209279,-19.877653584392814 -43.939950026336248,-19.87685172316715</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939950026336248,-19.87685172316715 -43.939939825040277,-19.876739552843308</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939976025356671,-19.875830663057819 -43.939994256939251,-19.875202831827924</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939967073233497,-19.875994127373612 -43.939976025356671,-19.875830663057819</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939939825040277,-19.876739552843308 -43.939936713517604,-19.876650822287438</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939936713517604,-19.876650822287438 -43.939967073233497,-19.875994127373612</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940899665691369,-19.874442296500987 -43.940602986683189,-19.87466138480297 -43.940088524340901,-19.875043935819527</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940583341872241,-19.87365662338259 -43.940536094910875,-19.873543101624701</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940536094910875,-19.873543101624701 -43.940495300920766,-19.87344470232879 -43.940342963869128,-19.873043612253266</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940875555058206,-19.874356112989481 -43.940583341872241,-19.87365662338259</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932800623699812,-19.875641791058296 -43.932628326999868,-19.875744877998358</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93657638066469,-19.874946494704279 -43.936264939404474,-19.875100231251473 -43.93593231606053,-19.875197696413672</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939301710130422,-19.873499733524703 -43.93876639325979,-19.873778501801368</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93593231606053,-19.875197696413672 -43.935707898073481,-19.875254771270832</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935707898073481,-19.875254771270832 -43.935385629346833,-19.875324075295286 -43.935060785798321,-19.875325145240765</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936735453086754,-19.874865819216154 -43.93657638066469,-19.874946494704279</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935060785798321,-19.875325145240765 -43.934820209996232,-19.875324369278655</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.933253194995594,-19.875409054845736 -43.932800623699812,-19.875641791058296</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940252075200874,-19.87298524725135 -43.940066108386226,-19.87308444785031</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.933548637942252,-19.875325156218935 -43.933253194995594,-19.875409054845736</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932363899876016,-19.875936814719868 -43.932225665132272,-19.876038229188719</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932225665132272,-19.876038229188719 -43.931662968304551,-19.876431101547166</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939488004430736,-19.873400461764252 -43.939301710130422,-19.873499733524703</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93876639325979,-19.873778501801368 -43.938610774653952,-19.873862091961445</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934820210006791,-19.875324369296695 -43.933839395113985,-19.875314465743688 -43.933548637942252,-19.875325156218935</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938610774653952,-19.873862091961445 -43.937566264697097,-19.874432002978711</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937360178847399,-19.874541519600736 -43.936735453086754,-19.874865819216154</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932628326999868,-19.875744877998358 -43.932363899876016,-19.875936814719868</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939931966481872,-19.873157145492478 -43.939488004430736,-19.873400461764252</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937566264697097,-19.874432002978711 -43.937360178847399,-19.874541519600736</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940066108386226,-19.87308444785031 -43.939931966481872,-19.873157145492478</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.930757272546828,-19.876359810581867 -43.930586583737998,-19.876292839173534</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.930586583737998,-19.876292839173534 -43.929097927124715,-19.87569498244499</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.931386984589693,-19.876608274880226 -43.930757272546828,-19.876359810581867</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929843041058106,-19.903024106787537 -43.92956964874071,-19.902927788322788 -43.929298093376367,-19.902792635325259 -43.929089537988595,-19.902671592456784 -43.928871682219949,-19.902504601854119 -43.928663841970639,-19.902300813559304 -43.92850940566359,-19.902097346651811 -43.928365280698927,-19.901824833450803 -43.928255305891703,-19.901534277650587 -43.928193576218881,-19.901308242454594 -43.928069363795672,-19.900640531570563</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.927205289488747,-19.895254025799769 -43.927194074634706,-19.895019327536158 -43.927354950526244,-19.894394166849317 -43.927641621817386,-19.893837878482081 -43.92772928739474,-19.893492999484064</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.927885169007936,-19.899569463063106 -43.927742665941544,-19.898775891751846</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.928569485627953,-19.890710193134471 -43.928688314751263,-19.890315771073794</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.927222103778,-19.895586782415766 -43.927205289488747,-19.895254025799769</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.928234603269509,-19.875741553499996 -43.928102180291759,-19.875313187535934</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.927995472831618,-19.892580160620348 -43.928569485627953,-19.890710193134471</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929065641972777,-19.878589755802373 -43.928868878733397,-19.877972558693777</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.928688314751263,-19.890315771073794 -43.92873335408526,-19.890153795546571</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.928421761130316,-19.876392750837315 -43.928234603269509,-19.875741553499996</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929144897395332,-19.885079379245116 -43.929163752935843,-19.884969190195573</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.927550606123042,-19.8976919475225 -43.927531240846939,-19.897573307838815</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.928688955833572,-19.87734588686796 -43.928421761130316,-19.876392750837315</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929107514961885,-19.886059409783133 -43.929106178021087,-19.885473199828759</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929139534953876,-19.887131098800278 -43.929127983156846,-19.886787384410994</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929631440706444,-19.880489077807102 -43.929615296415477,-19.880430261168755</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.928868878733397,-19.877972558693777 -43.928823167012652,-19.87782503306504</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.927742665941544,-19.898775891751846 -43.927550606123042,-19.8976919475225</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.92772928739474,-19.893492999484064 -43.927813416184087,-19.893174508044069</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929127983156846,-19.886787384410994 -43.929107514961885,-19.886059409783133</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.928823167012652,-19.87782503306504 -43.928688955833572,-19.87734588686796</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.927531240846939,-19.897573307838815 -43.927313156010385,-19.8962372548038 -43.927231649261024,-19.895755444535368 -43.927222103778,-19.895586782415766</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929124407539831,-19.885256950455755 -43.929144897395332,-19.885079379245116</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.92873335408526,-19.890153795546571 -43.929029629147173,-19.889209742010923 -43.929112287539255,-19.888782580317088 -43.929156756980902,-19.888506052909666 -43.929139534953876,-19.887131098800278</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.930018061992364,-19.90308351754415 -43.929843041058106,-19.903024106787537</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929163752935843,-19.884969190195573 -43.929213283913171,-19.884771377278778 -43.929250319457694,-19.884628053231104</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.928069363795672,-19.900640531570563 -43.927885169007936,-19.899569463063106</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929118600012579,-19.878795863877336 -43.929065641972777,-19.878589755802373</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929250319457694,-19.884628053231104 -43.929304559861471,-19.884432617376181</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929106178021087,-19.885473199828759 -43.929124407539831,-19.885256950455755</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929615296415477,-19.880430261168755 -43.929118600012579,-19.878795863877336</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929304559861471,-19.884432617376181 -43.929393830990165,-19.884169458092664 -43.929726171391565,-19.883282531847225 -43.929836589180553,-19.88294298321085 -43.929921623518688,-19.882571573358671 -43.929967558189254,-19.882170117003888 -43.92994648472127,-19.881813155885546 -43.929886127560529,-19.88141846848816 -43.929744137238274,-19.880900611677191 -43.929631440706444,-19.880489077807102</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.927813416184087,-19.893174508044069 -43.927995472831618,-19.892580160620348</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929374835590785,-19.901572925807979 -43.929310114170185,-19.901425877655534</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929310114170185,-19.901425877655534 -43.929215445124825,-19.901212348708054</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929668694102773,-19.902245538108737 -43.929374835590785,-19.901572925807979</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929870956832204,-19.90269138049517 -43.929726557563946,-19.90237183652599</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929726557563946,-19.90237183652599 -43.929668694102773,-19.902245538108737</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929852656490446,-19.900916183949938 -43.929747310796628,-19.900956796588325</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929747310796628,-19.900956796588325 -43.92931556108384,-19.901127855674243</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.930333319402081,-19.900734051698475 -43.929852656490446,-19.900916183949938</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.930901390429739,-19.901779830127477 -43.930945980195879,-19.901873104810747</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.930421633578973,-19.900728975757698 -43.930901390429739,-19.901779830127477</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.930945980195879,-19.901873104810747 -43.931114498668833,-19.902218752211368</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.931689351932356,-19.902138599683457 -43.931774804701142,-19.902119837303022</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.931193864387232,-19.902251814710194 -43.931689351932356,-19.902138599683457</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.931774804701142,-19.902119837303022 -43.932282620981432,-19.902011101100086</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932403590728931,-19.901983799755662 -43.932686019828537,-19.901916931442518 -43.933017938499219,-19.902032331405564</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932282620981432,-19.902011101100086 -43.932403590728931,-19.901983799755662</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932221954086195,-19.906789527350298 -43.932224960840664,-19.906926396531286</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932265847939156,-19.904483292184857 -43.932216322369257,-19.904628545244396</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932110137377556,-19.905790665945872 -43.932189130209728,-19.906278823306309</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932216322369257,-19.904628545244396 -43.932027922966206,-19.905095488761869 -43.932018264039918,-19.905184955418637 -43.932076220064133,-19.905573032972523</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932711441885573,-19.90322493229765 -43.93258018393982,-19.903603985484597</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93258018393982,-19.903603985484597 -43.93243549951417,-19.903989130315448</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932206075144606,-19.906451590698616 -43.93221862731184,-19.906700531949411</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932765718348293,-19.903076703393943 -43.932711441885573,-19.90322493229765</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932189130209728,-19.906278823306309 -43.932206075144606,-19.906451590698616</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.933102986380653,-19.902111957603193 -43.932860701429114,-19.902817539413324</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932821564401586,-19.902925367054689 -43.932765718348293,-19.903076703393943</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932338309346811,-19.910386440334278 -43.932370836074504,-19.911408805715656</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932301484992863,-19.910065955550191 -43.932338309346811,-19.910386440334278</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932284702599851,-19.908712666141611 -43.932288027218391,-19.908920671876711</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932241345911308,-19.907603876233548 -43.932284702599851,-19.908712666141611</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932076220064133,-19.905573032972523 -43.932110137377556,-19.905790665945872</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93243549953332,-19.903989130327769 -43.932265847934069,-19.904483292941279</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932289185979954,-19.909907652821438 -43.932301484992863,-19.910065955550191</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93221862731184,-19.906700531949411 -43.932221954086195,-19.906789527350298</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932288027218391,-19.908920671876711 -43.932286046217946,-19.909345150312063 -43.93228679505772,-19.909350943548983</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932227550420251,-19.907042168318625 -43.932239235161774,-19.907534299385013</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932239235161774,-19.907534299385013 -43.932241345911308,-19.907603876233548</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932860701429114,-19.902817539413324 -43.932821564401586,-19.902925367054689</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932224960840664,-19.906926396531286 -43.932227550420251,-19.907042168318625</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932275315559828,-19.909592051997684 -43.932289185979954,-19.909907652821438</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93228679505772,-19.909350943548983 -43.932275315559828,-19.909592051997684</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.930525817146048,-19.911944910558358 -43.93034862102084,-19.911989374269353</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93034862102084,-19.911989374269353 -43.929857339696042,-19.912119833288756</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.931193361367676,-19.911788324856115 -43.931005475216189,-19.911830351001459</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93169319633455,-19.911682524824389 -43.931193361367676,-19.911788324856115</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.932287836720242,-19.911533696073459 -43.931801641062876,-19.911651377345294</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.931801641062876,-19.911651377345294 -43.93169319633455,-19.911682524824389</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.931005475216189,-19.911830351001459 -43.930525817146048,-19.911944910558358</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.929815790655425,-19.912265568755135 -43.930090062924386,-19.913205645372845</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.930836727781823,-19.9131649669871 -43.930924405322287,-19.913176515250008 -43.931635910231527,-19.913573759376426</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.931778158849404,-19.913752578894059 -43.933635180601826,-19.914778486132054</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.930168596232825,-19.913253274012625 -43.9305029201754,-19.913170728910519 -43.930639722531758,-19.913151677284514 -43.930758037506848,-19.913152388664741 -43.930836727781823,-19.9131649669871</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.931635910231527,-19.913573759376426 -43.932176428099453,-19.913872590257384 -43.932329122493016,-19.913962308887825 -43.932381406302682,-19.914036157568535 -43.932362572941983,-19.914084013762224</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93416846593113,-19.915135083934121 -43.934140686238919,-19.915189662027085 -43.93413166239516,-19.915254922035498 -43.934206220011845,-19.91554354589497 -43.934263040290816,-19.915716521615941 -43.934336159766531,-19.915784803368268</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934454114318989,-19.916568737307614 -43.934520718271934,-19.916810066811404</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934520718248429,-19.916810066753335 -43.934697877415438,-19.917427635299639</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934336159766531,-19.915784803368268 -43.934278770476816,-19.915920146529288 -43.934454114318989,-19.916568737307614</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934836192079331,-19.917443010334502 -43.935263651016456,-19.917343747150213</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936319093608915,-19.920794063211133 -43.936391101139286,-19.921040844672323</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935455244409653,-19.917610725490768 -43.935680560898284,-19.918432701269197</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935715610303674,-19.918598499922016 -43.936012954054952,-19.919676290874129</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936012954054952,-19.919676290874129 -43.936052287484578,-19.919837688557038</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936474167167326,-19.921377487842637 -43.936577099571153,-19.92182988194638</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935680560898284,-19.918432701269197 -43.935715610303674,-19.918598499922016</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936052287484578,-19.919837688557038 -43.936319093608915,-19.920794063211133</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936391101139286,-19.921040844672323 -43.936474167167326,-19.921377487842637</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935170648919907,-19.924383436636315 -43.936766785013489,-19.921855678654687</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.933741542391552,-19.926654898460516 -43.935170648919907,-19.924383436636315</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934218509428881,-19.926710154834257 -43.934304888019646,-19.92668158407929 -43.934459251604018,-19.92663002343722 -43.93502678139312,-19.926490781820902</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935174773888498,-19.926454636500562 -43.936207676745234,-19.926202359187503</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935026781346721,-19.926490781770919 -43.935174773888498,-19.926454636500562</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93649859894095,-19.926252069347175 -43.936737519878662,-19.927150731365668 -43.936737010542984,-19.927226882878621 -43.936809353769746,-19.92747104635875</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937097996031618,-19.9285572750887 -43.937149677997951,-19.928733923062651 -43.937194410964089,-19.928795168416325 -43.937301242388948,-19.929207294778227 -43.937405027922402,-19.92959194025368 -43.937435628867298,-19.929763764553858</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937435628867298,-19.929763764553858 -43.937502756431243,-19.929904550435875</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937502756431243,-19.929904550435875 -43.937640233140577,-19.9304467652094 -43.937725146690603,-19.930755504494961 -43.937775027031535,-19.930977942665759</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936809353769746,-19.92747104635875 -43.937101673319241,-19.92847861307332 -43.937097996031618,-19.9285572750887</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937569812526064,-19.931152151426375 -43.937613336671717,-19.931111488723364 -43.937629110675175,-19.93107355091913 -43.937632338620233,-19.931038519251132</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937569812526064,-19.931152151426375 -43.937613336671717,-19.931111488723364 -43.937629110675175,-19.93107355091913 -43.937632338620233,-19.931038519251132</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937925973011104,-19.933253814978123 -43.937904849531563,-19.933266968338398 -43.937890708647288,-19.933284499633487 -43.937874476257853,-19.933320266605108</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937874476257853,-19.933320266605108 -43.937882107491305,-19.933380838358367 -43.937893766572387,-19.933428154570791 -43.937921532484793,-19.933458493262837 -43.937947138690738,-19.933517275361957 -43.938102921077672,-19.934126719938533</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937925973011104,-19.933253814978123 -43.937851391141812,-19.93323792147309 -43.937765346114951,-19.933204343595985 -43.93768627349052,-19.93315310120807 -43.937602867703895,-19.933066510910393 -43.93756850826076,-19.932973619187834 -43.937540128193454,-19.932846615628304</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937540128193454,-19.932846615628304 -43.93751138593359,-19.932726656225238 -43.937426642986566,-19.932451252443315 -43.937200245379934,-19.931622226188217 -43.937142902551749,-19.931420159543666 -43.937135562973616,-19.931351368790381</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93568266612899,-19.93807425922007 -43.935509935687563,-19.938360768351437</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937356544273129,-19.935382014264896 -43.936704709229865,-19.936412117319978</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934782635592477,-19.939502609885327 -43.934598942357127,-19.939813804666262</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936704709229865,-19.936412117319978 -43.936401538676762,-19.936882948266877</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938074099799202,-19.934207128760825 -43.937497361416696,-19.935142377984981</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936401538676762,-19.936882948266877 -43.93568266612899,-19.93807425922007</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935509935687563,-19.938360768351437 -43.935461855489955,-19.938434285925947 -43.935112847436613,-19.938971960284714 -43.934782635592477,-19.939502609885327</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937497361416696,-19.935142377984981 -43.937356544273129,-19.935382014264896</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934301987535122,-19.940072556472977 -43.933336903355269,-19.939991513229277</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940339573000735,-19.95556938368571 -43.939977767046209,-19.9550464288825 -43.939956291546942,-19.955030712879708</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93605811803436,-19.949278794747435 -43.935743048411865,-19.948805165254214 -43.935551253563609,-19.948548632098955</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936986782327629,-19.950618638879256 -43.936643668726596,-19.950119729174244</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.937886453948899,-19.951948458381587 -43.936986782327629,-19.950618638879256</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935036149472744,-19.947414701248693 -43.933300934322972,-19.941100639873696 -43.933049756694437,-19.940103433211714 -43.933031161623617,-19.940021475891015</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939050463407611,-19.953672369294864 -43.938287334297065,-19.952541210484132</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939904622673424,-19.954968605863566 -43.939886309326006,-19.954924830725172 -43.939676724330788,-19.95458101986403</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939956291546942,-19.955030712879708 -43.939904622673424,-19.954968605863566</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935551253563609,-19.948548632098955 -43.935466946987191,-19.948383893487442 -43.935313746951891,-19.948117744687387 -43.935192496388403,-19.947869403116719 -43.935090206894372,-19.94757826494676 -43.935036149472744,-19.947414701248693</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936643668726596,-19.950119729174244 -43.936364084600591,-19.949711898083578</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936364084600591,-19.949711898083578 -43.93605811803436,-19.949278794747435</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939676724330788,-19.95458101986403 -43.939551905651093,-19.95455841271194 -43.939438046495312,-19.954452218558263 -43.939166987341885,-19.954051759738025 -43.939038635881865,-19.953803287770107 -43.939050463407611,-19.953672369294864</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938287334297065,-19.952541210484132 -43.93826759956189,-19.952487703105476 -43.937886453948899,-19.951948458381587</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.941974461857335,-19.957716426881412 -43.941673625097991,-19.957360330401443 -43.941008102426409,-19.956546035282464 -43.940532796616729,-19.955862145921753</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.941974461857335,-19.957716426881412 -43.941673625097991,-19.957360330401443 -43.941008102426409,-19.956546035282464 -43.940532796616729,-19.955862145921753</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940133263524316,-19.956415502060192 -43.940198349892007,-19.956197921012947 -43.940301797769528,-19.955822012465031</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93784929529771,-19.958289415857333 -43.937790140798505,-19.958263634280346 -43.93769301265759,-19.958200449312386 -43.937644530974175,-19.958144782419332 -43.937552846877288,-19.957951092602432 -43.937536971937924,-19.957885954750601 -43.937546306803881,-19.957739212552667 -43.93761549254026,-19.957574128739246 -43.937741748955041,-19.957441094797542 -43.937875094789163,-19.957379017942834 -43.938174345014367,-19.957323172991625 -43.93821094210076,-19.957312579708859</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938484457042016,-19.957303049671935 -43.938644458882507,-19.957309633333935 -43.938924062924471,-19.957399022369149 -43.939571938922981,-19.957692695903518 -43.939742752780326,-19.957719010676843 -43.939899049102699,-19.957700973300032 -43.940013296950866,-19.957631373101396 -43.940074998233349,-19.957560104021415 -43.94014661694996,-19.957443273774913 -43.940273665439982,-19.957167690346868 -43.940268565144805,-19.95705826137851 -43.940245483853715,-19.956939329983328 -43.940181273891511,-19.956678323416746 -43.940150292385312,-19.956629374388719</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93821094210076,-19.957312579708859 -43.938484457042016,-19.957303049671935</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938090941176917,-19.958319219164501 -43.939023037978025,-19.958458909198754 -43.939266584821176,-19.958496680324156 -43.939560521458638,-19.958493377669349 -43.939723282980161,-19.958463093228055 -43.939907786654302,-19.958386505099078 -43.940759881556659,-19.957929154960787</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938002906337871,-19.961453689133464 -43.938242271338822,-19.96140935356696 -43.939245662155209,-19.961508041680922</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940587345860941,-19.959169972730944 -43.940582000131663,-19.958831647434785 -43.940638020349461,-19.958582655329803</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940638020349461,-19.958582655329803 -43.940678999196393,-19.958456245269637</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940678999196393,-19.958456245269637 -43.940770608756324,-19.958246303017372 -43.940784385066522,-19.958121306715629</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939245662051775,-19.961508041680311 -43.939690052319676,-19.961589907847735</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.939690052319676,-19.961589907847735 -43.940042834206466,-19.961632317987785 -43.940333421608102,-19.961600447778828 -43.940551445963123,-19.961448898601876 -43.940660169294851,-19.96123933265222 -43.940658901026332,-19.960638491548739 -43.940594479766609,-19.959407821212498</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940594479766609,-19.959407821212498 -43.940587345880772,-19.959169972723384</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936377422970608,-19.96190125609672 -43.936568419188212,-19.961911100153472</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934439072727649,-19.966462587285847 -43.93442426409991,-19.966380361147468</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93442426409991,-19.966380361147468 -43.934400142382799,-19.966248509803791</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934400142382799,-19.966248509803791 -43.934292115138781,-19.965665811769945</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936568419188212,-19.961911100153472 -43.936984264833264,-19.961924243571136 -43.937647015599417,-19.961610766774463 -43.937876275539125,-19.961490820638687</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934238196714809,-19.964001734923833 -43.934267123135584,-19.963364027923017</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934270300613633,-19.965533259010023 -43.934215773018579,-19.965133037649039 -43.934212366683234,-19.964596143634026 -43.93423018727416,-19.964182347270047</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934275071438783,-19.963215985058206 -43.934319490620261,-19.962491118459962 -43.934427962331036,-19.962343797489069 -43.935037457697369,-19.961994147122066 -43.935300639868494,-19.9618542580995 -43.935399323224587,-19.961826755197833 -43.935455006747688,-19.961832481083494</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935455006747688,-19.961832481083494 -43.935688459998808,-19.961853334927365</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93423018727416,-19.964182347270047 -43.934238196714809,-19.964001734923833</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934267123170926,-19.963364027918715 -43.934275071417275,-19.963215985029695</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935688459998808,-19.961853334927365 -43.936377422970608,-19.96190125609672</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934292115138781,-19.965665811769945 -43.934270300613633,-19.965533259010023</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934569340308656,-19.966679411123778 -43.934526571919989,-19.966690630973169</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.934569340308656,-19.966679411123778 -43.934526571919989,-19.966690630973169</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935578128853955,-19.967713561882864 -43.935715263044031,-19.967743431585564</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940380194806103,-19.968790593953031 -43.940526688358432,-19.968824050018195</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938527640458595,-19.968380980163762 -43.940380194806103,-19.968790593953031</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935280947607843,-19.967644629178025 -43.935578128853955,-19.967713561882864</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.936560567121433,-19.967927074505386 -43.938360655579672,-19.968343284862584</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.938360655579672,-19.968343284862584 -43.938527640458595,-19.968380980163762</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940526688358432,-19.968824050018195 -43.942384361271635,-19.969257031655939</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.93639043991552,-19.967888811845199 -43.936560567121433,-19.967927074505386</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.935715263044031,-19.967743431585564 -43.93639043991552,-19.967888811845199</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940960026120102,-19.973454800378864 -43.940890426601136,-19.973627859472952</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.941233777082303,-19.972777264419992 -43.941159362724605,-19.972963118156887</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.941963206157368,-19.970970140372646 -43.941902515350456,-19.971120696030614</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.942320952246142,-19.969969134603261 -43.942282971128222,-19.970095418625423</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.942482134065315,-19.969416729409648 -43.942320952246142,-19.969969134603261</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.941703590612988,-19.971596831491404 -43.941602483412616,-19.971846937763722</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.941902515350456,-19.971120696030614 -43.941703590612988,-19.971596831491404</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.940890426601136,-19.973627859472952 -43.940714832597941,-19.974068288772187</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.941159362724605,-19.972963118156887 -43.940960026120102,-19.973454800378864</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.942282971128222,-19.970095418625423 -43.942226852938155,-19.970273221378864</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.942171318832571,-19.970430894714394 -43.941963206157368,-19.970970140372646</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.941602483412616,-19.971846937763722 -43.941233777082303,-19.972777264419992</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.942226852938155,-19.970273221378864 -43.942171318832571,-19.970430894714394</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.942696925205553,-19.975017434678342 -43.941510019411325,-19.974629765585007</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.941510019411325,-19.974629765585007 -43.940697964481259,-19.974313980041927</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.94330347720922,-19.974369446485035 -43.943321694575616,-19.974450226158638 -43.943359064380225,-19.974566080427007 -43.943388351402248,-19.974653159301148 -43.943464183994791,-19.974803661136782 -43.943543697153181,-19.974910371302055</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.94330347720922,-19.974369446485035 -43.943321694575616,-19.974450226158638 -43.943359064380225,-19.974566080427007 -43.943388351402248,-19.974653159301148 -43.943464183994791,-19.974803661136782 -43.943543697153181,-19.974910371302055</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.94330347720922,-19.974369446485035 -43.943321694575616,-19.974450226158638 -43.943359064380225,-19.974566080427007 -43.943388351402248,-19.974653159301148 -43.943464183994791,-19.974803661136782 -43.943543697153181,-19.974910371302055</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.94330347720922,-19.974369446485035 -43.943321694575616,-19.974450226158638 -43.943359064380225,-19.974566080427007 -43.943388351402248,-19.974653159301148 -43.943464183994791,-19.974803661136782 -43.943543697153181,-19.974910371302055</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.94330347720922,-19.974369446485035 -43.943321694575616,-19.974450226158638 -43.943359064380225,-19.974566080427007 -43.943388351402248,-19.974653159301148 -43.943464183994791,-19.974803661136782 -43.943543697153181,-19.974910371302055</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.94330347720922,-19.974369446485035 -43.943321694575616,-19.974450226158638 -43.943359064380225,-19.974566080427007 -43.943388351402248,-19.974653159301148 -43.943464183994791,-19.974803661136782 -43.943543697153181,-19.974910371302055</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.94330347720922,-19.974369446485035 -43.943321694575616,-19.974450226158638 -43.943359064380225,-19.974566080427007 -43.943388351402248,-19.974653159301148 -43.943464183994791,-19.974803661136782 -43.943543697153181,-19.974910371302055</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.94330347720922,-19.974369446485035 -43.943321694575616,-19.974450226158638 -43.943359064380225,-19.974566080427007 -43.943388351402248,-19.974653159301148 -43.943464183994791,-19.974803661136782 -43.943543697153181,-19.974910371302055</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.94330347720922,-19.974369446485035 -43.943321694575616,-19.974450226158638 -43.943359064380225,-19.974566080427007 -43.943388351402248,-19.974653159301148 -43.943464183994791,-19.974803661136782 -43.943543697153181,-19.974910371302055</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.94330347720922,-19.974369446485035 -43.943321694575616,-19.974450226158638 -43.943359064380225,-19.974566080427007 -43.943388351402248,-19.974653159301148 -43.943464183994791,-19.974803661136782 -43.943543697153181,-19.974910371302055</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.946393267983858,-19.973902882408375 -43.946424719414779,-19.973998148277133</coordinates></LineString>
+  </Placemark>
+</Folder>
+</Document></kml>

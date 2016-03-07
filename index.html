@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+
+<!-- Itinerários das linhas de ônibus da cidade de Belo Horizonte (MG, Brasil) -->
+<!-- Diogo Rennó R. Oliveira, Maio de 2014 -->
+
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<meta charset="utf-8">
+		
+		<title>Belo Horizonte - Itinerários das linhas de ônibus</title>
+		<link rel="image_src" href="http://aqui.io/onibusBH/BH.jpg" />
+		
+		<meta property="og:image" content="http://aqui.io/onibusBH/BH.jpg" />
+		<meta property="og:title" content="Belo Horizonte - Itinerários das linhas de ônibus" />
+		<meta property="og:description" content="Por onde seu ônibus passa? Veja no mapa a rota das linhas de ônibus que atendem à cidade de Belo Horizonte." />
+
+	    <link rel="stylesheet" type="text/css" href="reset.css">		
+	    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Vollkorn">
+		<style>
+			html, body {
+				width: 1000px;
+				height: 100%;
+				margin: 0 auto 0 auto;
+				padding: 0px;
+				font-family: "Vollkorn", serif;
+				font-size: 12pt;
+			}
+			
+			body {
+				display: table;
+			}
+			
+			#wrapper {
+				width: 1000px;
+				margin: 0 auto 0 auto;
+				display: table-cell;
+				vertical-align: middle;
+			}
+
+			#map-box {
+				height: 500px;
+				width: 972px;
+				margin: 0 auto 10px auto;
+				border: 4px solid #FFFFFF;
+				position: relative;
+			}
+
+			#map-canvas {
+				height: 100%;
+				width: 100%;
+			}
+			
+			#header {
+				width: 980px;
+				height: 100px;
+				margin: 5px auto 10px auto;
+				padding: 15px 0 20px 0;
+				background-color: #FFFFFF;
+				background-color: rgba(255, 255, 255, 0.9);
+			}
+			
+			#title {
+				font-size: 28pt;
+				text-align: center;
+				margin: 0 auto 15px auto;
+			}
+			
+			#code {
+				margin: 5px 0 0 40px;
+			}
+			
+			#route {
+				margin: 4px 0 5px 40px;
+			}
+			
+			#code input {
+				border: 1px solid black;
+				font-family: inherit;
+				font-size: 12pt;
+				margin: 0 0 0 4px;
+			}
+			
+			#route select {
+				background-color: white;
+				border: 1px solid black;
+				font-family: inherit;
+				font-size: 10pt;
+				margin: 0 0 0 4px;
+				width: 650px;
+			}
+			
+			#explain {
+				margin: 0 0 0 40px;
+				cursor: pointer; 
+				cursor: hand;
+			}
+			
+			#popup {
+				display: none;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 5;
+				background-color: #FFFFFF;
+				background-image: url('BH3.jpg');
+			}
+
+			#popup .wrapper {
+				display: table;
+				width: 530px;
+				height: 100%;
+				margin: 0 auto 0 auto;
+				padding: 10px 30px 10px 30px;
+				background-color: #FFFFFF;
+				background-color: rgba(255, 255, 255, 0.85);
+			}
+			
+			#popup .text {
+				display: table-cell;
+				vertical-align: middle;
+				text-align: justify;
+				font-size: 14pt;
+			}
+			
+			.green {
+				color: #0B610B;
+			}
+			
+			.orange {
+				color: #DF7401;
+			}
+			
+			#background {
+				position: fixed; 
+				top: -50%; 
+				left: -50%; 
+				width: 200%; 
+				height: 200%;
+				z-index: -1;
+			}
+
+			#background img {
+				position: absolute; 
+				top: 0; 
+				left: 0; 
+				right: 0; 
+				bottom: 0; 
+				margin: auto; 
+				min-width: 50%;
+				min-height: 50%;
+				z-index: -1;
+				display: none;
+			}
+		</style>
+		
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+
+			var map;		
+			var layer1, layer2;
+			lines = {};
+
+
+
+line_codes = ['30', '32', '33', '34', '35', '60', '62', '63', '64', '65', '66', '67', '80', '81', '82', '83P', '83D', '101', '102', '103', '104', '105', '107', '201', '202', '203', '204', '205', '206', '301', '302', '303', '304', '305', '308', '309', '310', '311', '313', '314', '315', '318', '319', '320', '321', '325', '326', '327', '328', '329', '330', '331', '332', '335', '336', '337', '340', '341', '342', '401', '402', '404', '504', '506', '507', '533', '535', '601', '607', '608', '609', '621', '622', '623', '624', '625', '626', '627', '630', '631', '633', '634', '635', '636', '637', '638', '639', '640', '641', '642', '702', '703', '705', '706', '707', '708', '709', '710', '711', '713', '714', '715', '716', '732', '734', '735', '736', '737', '738', '739', '741', '806', '807', '808', '809', '810', '811', '812', '821', '822', '823', '832', '836', '837', '901', '1030', '1145', '1170', '1207B', '1207C', '1207A', '1404A', '1404B', '1404C', '1502', '1505R', '1505', '1509', '1510', '2004', '2101', '2102', '2103', '2104', '2150', '2151', '2152', '2207', '2208B', '2210A', '2210B', '2210C', '2211A', '2211B', '2212A', '2212C', '2212B', '2213', '2214', '2215C', '2215B', '2215A', '2215D', '2216', '2224A', '2224C', '2234B', '2234A', '2256A', '2402A', '3029', '3050', '3051', '3052', '3053', '3054', '3055', '3150', '3301A', '3301B', '3302D', '3302A', '3302B', '3350', '3501B', '3501A', '3502', '3503A', '4031', '4032', '4033', '4034', '4102', '4103', '4106', '4107', '4108', '4110', '4111', '4113', '4114', '4150', '4201', '4205', '4403D', '4403A', '4403C', '4405', '4410', '4501', '4801A', '4802A', '5031', '5101', '5102', '5201', '5401', '5502C', '5502B', '5502A', '5503A', '5503B', '5506C', '5506B', '5506A', '5507A', '5508', '5513', '5517', '5523A', '5534', '6024', '6025', '6027', '6350', '8001A', '8101', '8102', '8103', '8106', '8107', '8108', '8150', '8203', '8205', '8207', '8208', '8350', '8401', '8405', '8501', '8550', '9030', '9031', '9032', '9101', '9103', '9104', '9105', '9106', '9201', '9202', '9204', '9205', '9206', '9208', '9209', '9210', '9211', '9214', '9250', '9402', '9403', '9404', '9405', '9407', '9408', '9410', '9411', '9412', '9414', '9501', '9502', '9503', '9550', '9801', '9803', '9805', 'SE01', 'SC01A', 'SC01B', 'SC01R', 'SC02A', 'SC02B', 'SE02', 'SC03B', 'SC03A', 'SC04B', 'SC04A', 'S10', 'S20', 'S21', 'S22', 'S31', 'S32', 'S33', 'S41', 'S50', 'S52', 'S53', 'S54', 'S55', 'S61', 'S64', 'S65', 'S66', 'S70', 'S80', 'S82', 'S85'];
+
+
+		
+lines['101'] = {'tarifa': '0,60', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'SAO PEDRO - PRINCIPAL': '0'}};
+lines['102'] = {'tarifa': '0,60', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'NOSSA SENHORA DE FATIMA - PRINCIPAL': '0', 'NOSSA SENHORA DE FATIMA - ATENDIMENTO A AV. CARDOSO VIA RUA SAO JOAO': '1'}};
+lines['103'] = {'tarifa': '0,60', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'VILA CAFEZAL - PRINCIPAL': '0'}};
+lines['1030'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'AV. AFONSO PENA CENTRO - DIRETA': '0'}};
+lines['104'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'AV. DO CONTORNO - PRINCIPAL': '0'}};
+lines['105'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'EST. CENTRAL - PRINCIPAL': '0'}};
+lines['107'] = {'tarifa': '0,60', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'VILA MARCOLA - PRINCIPAL': '0'}};
+lines['1145'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'BAIRRO DAS INDUSTRIAS - PRINCIPAL': '0'}};
+lines['1170'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'MANGABEIRAS - PRINCIPAL': '0', 'SANTA LUCIA - PRINCIPAL': '1'}};
+lines['1207A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'BETANIA - NOTURNO': '0', 'BETANIA - PRINCIPAL': '1', 'SANTA MONICA - PRINCIPAL': '2', 'SANTA MONICA - NOTURNO': '3'}};
+lines['1207B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'CONJUNTO BETANIA - PRINCIPAL': '0', 'SANTA MONICA - PRINCIPAL': '1', 'SANTA MONICA - PARTIDAS DA AV. SANITARIA': '2'}};
+lines['1207C'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SANTA MONICA - PRINCIPAL': '0', 'BAIRRO DAS INDUSTRIAS 4A SECAO - PRINCIPAL': '1'}};
+lines['1404A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'PALMEIRAS - ITINERARIO NOTURNO': '0', 'ALIPIO DE MELO - PRINCIPAL': '1', 'PALMEIRAS - PRINCIPAL': '2', 'PALMEIRAS - ATENDIMENTO ESPECIAL AOS DOMINGOS/FERIADOS': '3'}};
+lines['1404B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTRELA DO ORIENTE - PRINCIPAL': '0', 'ESTRELA DO ORIENTE - ATENDIMENTO ESPECIAL AOS DOMINGOS/FERIADOS': '1', 'JARDIM INCONFIDENCIA - PRINCIPAL': '2'}};
+lines['1404C'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'SAO SALVADOR - PRINCIPAL': '0', 'PALMEIRAS - PRINCIPAL': '1'}};
+lines['1502'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'GUARANI - PRINCIPAL': '0', 'VISTA ALEGRE - PRINCIPAL': '1'}};
+lines['1505'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'ALTO DOS PINHEIROS - PRINCIPAL': '0', 'TUPI - ATENDIMENTO AO CONJUNTO FELICIDADE': '1', 'TUPI - PRINCIPAL': '2', 'ALTO DOS PINHEIROS - ATENDIMENTO NOTURNO': '3', 'TUPI - ATENDIMENTO NOTURNO': '4'}};
+lines['1505R'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'CONJUNTO FELICIDADE - PRINCIPAL': '0'}};
+lines['1509'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'CALIFORNIA - PRINCIPAL': '0', 'TUPI - PRINCIPAL': '1'}};
+lines['1510'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'PROVIDENCIA - PRINCIPAL': '0', 'MADRE GERTRUDES - PRINCIPAL': '1'}};
+lines['2004'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'BANDEIRANTES - DESVIO FEIRA DA AV. AFONSO PENA': '0', 'BANDEIRANTES - ATENDIMENTO AO CLUBE BH': '1', 'PILAR - PRINCIPAL': '2', 'BANDEIRANTES - ATEND.AO CLUBE BH E DESVIO FEIRA DA AV.AFONSO PENA': '3', 'PILAR - ATEND.AO CLUBE BH E DESVIO FEIRA DA AV.AFONSO PENA': '4', 'BANDEIRANTES - PRINCIPAL': '5', 'PILAR - DESVIO FEIRA DA AV. AFONSO PENA': '6', 'PILAR - ATENDIMENTO AO CLUBE BH': '7'}};
+lines['201'] = {'tarifa': '0,60', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'MORRO DAS PEDRAS - ATENDIMENTO A VILA SAO JOSE': '0', 'MORRO DAS PEDRAS - ATENDIMENTO A RUA NASCIMENTO GURGEL': '1', 'MORRO DAS PEDRAS - PRINCIPAL': '2'}};
+lines['202'] = {'tarifa': '0,60', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'VILA OESTE - ATENDIMENTO AO MADRE GERTRUDES': '0', 'VILA OESTE - PRINCIPAL': '1'}};
+lines['203'] = {'tarifa': '0,60', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'VILA LEONINA - PRINCIPAL': '0'}};
+lines['204'] = {'tarifa': '0,60', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO VILA OESTE - PRINCIPAL': '0'}};
+lines['205'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'METRO CALAFATE - PRINCIPAL': '0'}};
+lines['206'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'UPA OESTE - PRINCIPAL': '0'}};
+lines['2101'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'SION - PRINCIPAL': '0', 'GRAJAU - DESVIO FEIRA DA AV. AFONSO PENA': '1', 'GRAJAU - PRINCIPAL': '2', 'SION - DESVIO FEIRA DA AV. AFONSO PENA': '3'}};
+lines['2102'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'GAMELEIRA - DESVIO FEIRA DA AV. AFONSO PENA': '0', 'SERRA - DESVIO FEIRA DA AV. AFONSO PENA': '1', 'SERRA - PRINCIPAL': '2', 'GAMELEIRA - PRINCIPAL': '3'}};
+lines['2103'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ANCHIETA - PRINCIPAL': '0', 'PRADO - DESVIO FEIRA DA AV. AFONSO PENA': '1', 'PRADO - PRINCIPAL': '2'}};
+lines['2104'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'NOVA GAMELEIRA - DESVIO FEIRA DA AV.AFONSO PENA': '0', 'BH SHOPPING - PRINCIPAL': '1', 'NOVA GAMELEIRA - PRINCIPAL': '2', 'BH SHOPPING - DESVIO FEIRA DA AV.AFONSO PENA': '3', 'NOVA GAMELEIRA - ATEND. FAC. IZABELLA HENDRIX E MICROCITY': '4'}};
+lines['2150'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'SION - PRINCIPAL': '0', 'GRAJAU - PRINCIPAL': '1'}};
+lines['2151'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'VISTA ALEGRE - PRINCIPAL': '0', 'SERRA - PRINCIPAL': '1'}};
+lines['2152'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'CRUZEIRO - PRINCIPAL': '0', 'SALGADO FILHO - PRINCIPAL': '1'}};
+lines['2207'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SERRA VERDE - SERRA VERDE/RUA DOS GUAICURUS': '0', 'SERRA VERDE - RUA DOS TUPINAMBAS/SERRA VERDE': '1', 'SERRA VERDE - RETORNO NA AV. PARANA - DIRETA': '2', 'SERRA VERDE - PRINCIPAL': '3'}};
+lines['2208B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'JARDIM EUROPA - PRINCIPAL': '0', 'JARDIM EUROPA - JARDIM EUROPA/CENTRO': '1', 'JARDIM EUROPA - PARTIDAS DA RUA DOS CAETES': '2'}};
+lines['2210A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'RIO BRANCO - DIRETA': '0', 'RIO BRANCO - PRINCIPAL': '1'}};
+lines['2210B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'JARDIM LEBLON - JARDIM LEBLON VIA RIO BRANCO / CENTRO': '0', 'JARDIM LEBLON - PRINCIPAL': '1'}};
+lines['2210C'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'PIRATININGA - RETORNO EXPRESSO': '0', 'PIRATININGA - PRINCIPAL': '1', 'PIRATININGA - ITINERARIO NOTURNO': '2', 'PIRATININGA - DIRETA': '3'}};
+lines['2211A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'CAMPO ALEGRE - VIA JULIO MARIA - RETORNO AV. AFONSO PENA': '0', 'CAMPO ALEGRE - PRINCIPAL': '1', 'CAMPO ALEGRE - VIA JULIO MARIA - HOSPITAIS': '2'}};
+lines['2211B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'PLANALTO - PRINCIPAL': '0'}};
+lines['2212A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'JARDIM ATLANTICO - PRINCIPAL': '0', 'JARDIM ATLANTICO - PARTIDA AV.SINFONIA': '1'}};
+lines['2212B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'JARDIM LEBLON - ITINERARIO NOTURNO': '0', 'JARDIM LEBLON - PRINCIPAL': '1', 'JARDIM LEBLON - HOSPITAIS': '2'}};
+lines['2212C'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'COPACABANA - PARTIDA DA RUA DOS EXPEDICIONARIOS / CENTRO': '0', 'COPACABANA - PRINCIPAL': '1'}};
+lines['2213'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'TREVO - PRINCIPAL': '0'}};
+lines['2214'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'FLORAMAR - FLORAMAR-CENTRO/VIA AV.DR.CRISTIANO GUIMARAES': '0', 'FLORAMAR - FLORAMAR-CENTRO/VIA AV.PORTUGAL': '1', 'FLORAMAR - PRINCIPAL': '2', 'FLORAMAR - ATEND.AV.DR.CRISTIANO GUIMARAES (RETORNO EXPRESSO)': '3', 'FLORAMAR - ATENDIMENTO NOTURNO': '4', 'FLORAMAR - PARTIDAS AV.PARANA/FLORAMAR VIA AV.CRIST.GUIMARAES': '5', 'FLORAMAR - ATENDIMENTO A AV. PORTUGAL / RETORNO EXPRESSO': '6'}};
+lines['2215A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'CEU AZUL - RETORNO NO CENTRO S/ATENDIMENTO A.HOSPITALAR': '0', 'CEU AZUL - PRINCIPAL': '1', 'CEU AZUL - PARTIDAS DA R.DOS NAVEGANTES C/RETORNO NO CEU AZUL': '2', 'CEU AZUL - PARTIDAS DA AV.A': '3', 'CEU AZUL - DIRETA COM ATENDIMENTO A AREA HOSPITALAR': '4', 'CEU AZUL - PARTIDAS DA R.RADIALISTA ORLANDO CAVALCANTE': '5', 'CEU AZUL - PARTIDAS DA RUA DOS NAVEGANTES': '6', 'CEU AZUL - ITINERARIO NOTURNO': '7', 'CEU AZUL - DESVIO FESTA DE SAO LAZARO NA RUA PE.PAULO REGOLIO': '8'}};
+lines['2215B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'CEU AZUL - PRINCIPAL': '0', 'CEU AZUL - ITINERARIO NOTURNO': '1', 'CEU AZUL - HOSPITAIS': '2', 'CEU AZUL - DIRETA': '3', 'CEU AZUL - DIRETA-HOSPITAIS': '4'}};
+lines['2215C'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'CEU AZUL - PRINCIPAL': '0'}};
+lines['2215D'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'CEU AZUL - HOSPITAIS': '0', 'CEU AZUL - PRINCIPAL - ATEND. AO BAIRRO GARCAS': '1'}};
+lines['2216'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SANTA BRANCA - PRINCIPAL': '0'}};
+lines['2224A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'JARDIM DOS COMERCIARIOS - PRINCIPAL': '0', 'JARDIM DOS COMERCIARIOS - VIA AVENIDA CRISTIANO MACHADO': '1', 'JARDIM DOS COMERCIARIOS - RETORNO VDT. SAO FRANCISCO': '2', 'JARDIM DOS COMERCIARIOS - RUA DOS CAETES/JARDIM DOS COMERCIARIOS A': '3', 'JARDIM DOS COMERCIARIOS - PARTIDAS DA RUA IVAN FERREIRA ALVES': '4', 'JARDIM DOS COMERCIARIOS - JD.DOS COMERCIARIOS/AV.DO CONTORNO VIA C.MACHADO': '5'}};
+lines['2224C'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'JARDIM DOS COMERCIARIOS - PRINCIPAL': '0'}};
+lines['2234A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'JAQUELINE - ITINERARIO NOTURNO': '0', 'JAQUELINE - PRINCIPAL': '1', 'JAQUELINE - ATENDIMENTO A LINHA 2234B': '2', 'JAQUELINE - ATEND. RESIDENCIAL JAQUELINE 2A SECAO E F.LEOPOLDO': '3'}};
+lines['2234B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'JAQUELINE - JAQUELINE B/CENTRO': '0', 'JAQUELINE - PRINCIPAL': '1', 'JAQUELINE - PARTIDAS DA RUA DOS CAETES': '2'}};
+lines['2256A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SAO JOAO BATISTA - RETORNO AV. SANTOS DUMONT': '0', 'SAO JOAO BATISTA - PRINCIPAL': '1', 'SAO JOAO BATISTA - ITINERARIO NOTURNO': '2', 'SAO JOAO BATISTA - PARTIDAS DA PRACA PEDRO ALCANTARA MOREIRA': '3'}};
+lines['2402A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'NOSSA SENHORA DA GLORIA - PRINCIPAL': '0', 'SAO BERNARDO - PRINCIPAL': '1'}};
+lines['30'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - DIRETA': '0', 'ESTACAO DIAMANTE - ATENDIMENTO AO JARDIM ZOOLOGICO': '1', 'ESTACAO DIAMANTE - PARADORA': '2', 'ESTACAO DIAMANTE - PARADORA-ATENDIMENTO A AV. PARANA': '3', 'ZOOLOGICO - ATENDIMENTO AO JARDIM ZOOLOGICO': '4'}};
+lines['301'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - PRINCIPAL': '0'}};
+lines['302'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - PRINCIPAL': '0', 'ESTACAO DIAMANTE - ATENDIMENTO NOTURNO A VILA PINHO VIA CASTANHEIRAS': '1', 'ESTACAO DIAMANTE - ATENDIMENTO AO CONJUNTO AGUAS CLARAS': '2'}};
+lines['3029'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'REGINA - PRINCIPAL': '0'}};
+lines['303'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - PRINCIPAL': '0', 'ESTACAO DIAMANTE - ATENDIMENTO A AREA INDUSTRIAL': '1'}};
+lines['304'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - PRINCIPAL': '0'}};
+lines['305'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - ESTACAO DIAMANTE/AV.SOLFERINA RICCI PACE': '0', 'ESTACAO DIAMANTE - PARTIDAS DA RUA GERALDO ROSA FILHO': '1', 'ESTACAO DIAMANTE - AV.SOLFERINA RICCI PACE/ESTACAO DIAMANTE': '2', 'ESTACAO DIAMANTE - ATENDIMENTO AO SETOR IND. JATOBA IV': '3', 'ESTACAO DIAMANTE - ITINERARIO NOTURNO': '4', 'ESTACAO DIAMANTE - PRINCIPAL': '5'}};
+lines['3050'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - RET.SAVASSI-DIRETA EST.DIAMANTE A TOME DE SOUZA-PT': '0', 'ESTACAO DIAMANTE - RET.SAVASSI-DIRETA TOME DE SOUZA A EST.DIAMANTE-PM': '1', 'ESTACAO DIAMANTE - RETORNO BH SHOPPING': '2', 'ESTACAO DIAMANTE - HOSPITAIS-DIRETO A PARTIR DA R.RIO G.NORTE': '3', 'ESTACAO DIAMANTE - PRINCIPAL': '4', 'ESTACAO DIAMANTE - PARTIDAS DO ANEL-DIRETA ATE R.PROFESSOR MORAES-PT': '5', 'ESTACAO DIAMANTE - ESTACAO DIAMANTE/PRACA HUGO WERNECK': '6'}};
+lines['3051'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'FLAVIO MARQUES LISBOA - PRINCIPAL': '0'}};
+lines['3052'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - PRINCIPAL': '0', 'ESTACAO DIAMANTE - ATENDIMENTO AO BAIRRO BURITIS': '1', 'ESTACAO DIAMANTE - HOSPITAIS VIA HAVAI- DOMINGO': '2', 'ESTACAO DIAMANTE - ATENDIMENTO AO PARQUE DAS MANGABEIRAS': '3'}};
+lines['3053'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - PRINCIPAL': '0'}};
+lines['3054'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'BAIRRO MILIONARIOS - PRINCIPAL': '0', 'BAIRRO MILIONARIOS - RET.EXPRESSO-CENTRO/MILIONARIOS(PORTAS FECHADAS)PM': '1'}};
+lines['3055'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - PRINCIPAL': '0', 'ESTACAO BARREIRO - RET.EXPRESSO-DIRETA TOME DE SOUZA-EST.BARREIRO-PM': '1', 'ESTACAO BARREIRO - PARTIDAS DIRETAS-EST.BARREIRO A TOME DE SOUZA-PT': '2'}};
+lines['308'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - ITINERARIO NOTURNO': '0', 'ESTACAO BARREIRO - PRINCIPAL': '1'}};
+lines['309'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - PRINCIPAL-VILA SANTA RITA': '0'}};
+lines['310'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - PRINCIPAL': '0'}};
+lines['311'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - PRINCIPAL': '0', 'ESTACAO DIAMANTE - ATENDIMENTO NOTURNO': '1', 'ESTACAO DIAMANTE - PARTIDAS DA R. FLOR DE PITANGUEIRA / EST.BARREIRO': '2', 'ESTACAO DIAMANTE - PARTIDAS DA R. FLOR DE PITANGUEIRA / EST.DIAMANTE': '3', 'ESTACAO DIAMANTE - ESTACAO BARREIRO / INDEPENDENCIA': '4'}};
+lines['313'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - PRINCIPAL': '0'}};
+lines['314'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - PRINCIPAL': '0'}};
+lines['315'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'PRINCIPAL - PRINCIPAL': '0'}};
+lines['3150'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'REGINA - PRINCIPAL': '0'}};
+lines['318'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - ATENDIMENTO A REGIAO DO LIBERDADE': '0', 'ESTACAO BARREIRO - PARTIDAS DA RUA JEREMIAS': '1', 'ESTACAO BARREIRO - PRINCIPAL - ESTACAO BARREIRO': '2', 'ESTACAO BARREIRO - NOTURNO-ATEND. AOS BAIRROS LIBERDADE E BONSUCESSO': '3'}};
+lines['319'] = {'tarifa': '0,60', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO DIAMANTE - PRINCIPAL': '0', 'ESTACAO DIAMANTE - ATENDIMENTO AO HOSPITAL JULIA KUBITSCHEK': '1', 'ESTACAO DIAMANTE - ATENDIMENTO A PRACA JOSE VERANO': '2', 'ESTACAO DIAMANTE - ATENDIMENTO AO BONSUCESSO': '3'}};
+lines['32'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - ESTACAO BARREIRO - DIRETA / SANTO AGOSTINHO': '0', 'ESTACAO BARREIRO - DIRETA': '1', 'ESTACAO BARREIRO - PARADORA': '2'}};
+lines['320'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESCOLA - PRINCIPAL': '0', 'ESCOLA - TERCEIRA VIAGEM': '1', 'ESCOLA - SEGUNDA VIAGEM': '2', 'ESCOLA - QUARTA VIAGEM': '3', 'ESCOLA - QUINTA VIAGEM': '4', 'ESCOLA - SEXTA VIAGEM': '5'}};
+lines['321'] = {'tarifa': '0,60', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'OLHOS D AGUA - ATENDIMENTO AO SETOR INDUSTRIAL': '0', 'OLHOS D AGUA - PRINCIPAL': '1'}};
+lines['325'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'BARREIRO - PRINCIPAL': '0', 'BARREIRO - NOTURNO-ATEND. AO MILIONARIOS E FLAVIO M. LISBOA': '1'}};
+lines['326'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'BARREIRO - PRINCIPAL': '0'}};
+lines['327'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - NOTURNO': '0', 'ESTACAO BARREIRO - ATENDIMENTO AO CLUBE DA COPASA': '1', 'ESTACAO BARREIRO - PRINCIPAL': '2'}};
+lines['328'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - PRINCIPAL': '0', 'ESTACAO BARREIRO - PARTIDAS DA R. LUCAS DE CARVALHO SANTOS': '1'}};
+lines['329'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - VIA TERESA CRISTINA': '0', 'ESTACAO BARREIRO - PRINCIPAL': '1'}};
+lines['33'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - DIRETA': '0', 'ESTACAO BARREIRO - PRINCIPAL PARADORA': '1', 'ESTACAO BARREIRO - RETORNO NA R. DA BAHIA': '2'}};
+lines['330'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - PARTIDAS DA R. FLOR DE PITANGUEIRA / INDEPENDENCIA': '0', 'ESTACAO BARREIRO - INDEPENDENCIA/ESTACAO BARREIRO - RETORNO EXPRESSO': '1', 'ESTACAO BARREIRO - ATENDIMENTO AO BAIRRO MINEIRAO': '2', 'ESTACAO BARREIRO - NOTURNO': '3', 'ESTACAO BARREIRO - PARTIDAS DA R. FLOR DE PITANGUEIRA / MINEIRAO': '4', 'ESTACAO BARREIRO - PRINCIPAL': '5'}};
+lines['3301A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'SANTA TEREZINHA - PRINCIPAL': '0'}};
+lines['3301B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'CASTELO - PRINCIPAL': '0', 'CASTELO - ATENDIMENTO BAIRRO SANTA ANA': '1'}};
+lines['3302A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'NOVA PAMPULHA - PRINCIPAL': '0', 'NOVA PAMPULHA - ATENDIMENTO AOS HOSPITAIS': '1', 'NOVA PAMPULHA - RETORNO NA NEWTON PAIVA': '2', 'NOVA PAMPULHA - PARTIDAS DA RUA PETROPOLIS': '3'}};
+lines['3302B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'BRAUNAS - PRINCIPAL': '0', 'BRAUNAS - HOSPITAIS': '1'}};
+lines['3302D'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'BRAUNAS - PRINCIPAL': '0'}};
+lines['331'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - NOTURNO-MALDONADO, ANT. TEIXEIRA DIAS, STA.HELENA': '0', 'ESTACAO BARREIRO - ATENDIMENTO A PUC MINAS - BARREIRO': '1', 'ESTACAO BARREIRO - PRINCIPAL': '2'}};
+lines['332'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - PARTIDAS DA RUA DOUTOR CRISTIANO REZENDE': '0', 'ESTACAO BARREIRO - PRINCIPAL': '1'}};
+lines['335'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - PRINCIPAL': '0'}};
+lines['3350'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - PRINCIPAL': '0'}};
+lines['336'] = {'tarifa': '0,60', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'VILA BERNADETE - ATENDIMENTO A E.E. MARIA BELMIRA TRINDADE MANHA': '0', 'VILA BERNADETE - ATENDIMENTO A E.E. MARIA BELMIRA TRINDADE TARDE': '1', 'VILA BERNADETE - PRINCIPAL': '2'}};
+lines['337'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - PRINCIPAL': '0'}};
+lines['34'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - PRINCIPAL': '0'}};
+lines['340'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - PRINCIPAL': '0'}};
+lines['341'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - PRINCIPAL': '0'}};
+lines['342'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - ATENDIMENTO NOTURNO VIA BRASIL INDUSTRIAL': '0', 'ESTACAO BARREIRO - ATENDIMENTO AO BAIRRO SOLAR': '1', 'ESTACAO BARREIRO - PRINCIPAL': '2'}};
+lines['35'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTACAO BARREIRO - PRINCIPAL': '0', 'ESTACAO BARREIRO - PARADORA - VIA SINFRONIO BROCHADO': '1'}};
+lines['3501A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SAO MARCOS - ATENDIMENTO A EST.JOSE CANDIDO': '0', 'JARDIM ALVORADA - PRINCIPAL': '1', 'JARDIM ALVORADA - ATEND. CONDOMINIO FAZENDA DA SERRA': '2', 'JARDIM ALVORADA - ATENDIMENTO AO FERNAO DIAS': '3', 'SAO MARCOS - ATENDIMENTO AO FERNAO DIAS': '4', 'SAO MARCOS - RETORNO EXPRESSO(PORTAS FECHADAS)': '5', 'SAO MARCOS - PRINCIPAL': '6', 'JARDIM ALVORADA - ATENDIMENTO A EST.JOSE CANDIDO': '7', 'JARDIM ALVORADA - ATENDIMENTO A FAZ.DA SERRA/EST.JOSE CANDIDO': '8', 'JARDIM ALVORADA - RETORNO EXPRESSO(PORTAS FECHADAS)': '9'}};
+lines['3501B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'OURO PRETO 3A GLEBA - PRINCIPAL': '0', 'BAIRRO IPE - PRINCIPAL': '1'}};
+lines['3502'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'OURO PRETO - PRINCIPAL': '0', 'SAO GABRIEL - PRINCIPAL': '1'}};
+lines['3503A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SAO GABRIEL - PRINCIPAL': '0', 'SAO GABRIEL - ATENDIMENTO AO BAIRRO OURO MINAS': '1', 'SANTA TEREZINHA - ATENDIMENTO A PCA DIVINA PASTORA': '2', 'SANTA TEREZINHA - ATENDIMENTO NOTURNO AO BAIRRO OURO MINAS': '3', 'SANTA TEREZINHA - ATENDIMENTO AO BAIRRO OURO MINAS': '4', 'SANTA TEREZINHA - PRINCIPAL': '5'}};
+lines['401'] = {'tarifa': '0,60', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'CIDADE INDUSTRIAL - ATENDIMENTO A VILA DOS ESPORTES': '0', 'CIDADE INDUSTRIAL - PRINCIPAL': '1'}};
+lines['402'] = {'tarifa': '0,60', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'CIDADE INDUSTRIAL - ATENDIMENTO A RUA SILEX (MANHA)': '0', 'CIDADE INDUSTRIAL - ATENDIMENTO A RUA SILEX (TARDE)': '1', 'CIDADE INDUSTRIAL - PRINCIPAL': '2', 'CIDADE INDUSTRIAL - ATENDIMENTO A RUA SILEX-SABADOS E DOMINGOS': '3', 'CIDADE INDUSTRIAL - ATENDIMENTO AO SANTA MARIA-SABADOS E DOMINGOS': '4'}};
+lines['4031'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'SANTA MARIA - PRINCIPAL': '0'}};
+lines['4032'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'CAICARA - PRINCIPAL': '0', 'CAICARA - RETORNO NA PRACA DA LIBERDADE': '1', 'CAICARA - DESVIO FEIRA DA AV. AFONSO PENA': '2'}};
+lines['4033'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'CAMARGOS - PRINCIPAL': '0', 'CAMARGOS - ATENDIMENTO AO CONJUNTO ALDEIAS DA SERRA': '1'}};
+lines['4034'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'NOVO DOM BOSCO - PRINCIPAL': '0', 'NOVO DOM BOSCO - DESVIO FEIRA DA AV. AFONSO PENA': '1', 'NOVO DOM BOSCO - ATENDIMENTO AO CONJUNTO FILADELFIA': '2', 'NOVO DOM BOSCO - PRINCIPAL-ATEND.AO NOVO DOM BOSCO E CJ.FILADELFIA': '3', 'NOVO DOM BOSCO - ATENDIMENTO AO CONJ.FILADELFIA E RETORNO EXPRESSO': '4'}};
+lines['404'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'JARDIM ALVORADA - PRINCIPAL': '0'}};
+lines['4102'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SERRA - PRINCIPAL': '0', 'APARECIDA - PRINCIPAL': '1', 'APARECIDA - APARECIDA/CENTRO': '2'}};
+lines['4103'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'APARECIDA - DESVIO FEIRA DA AV.AFONSO PENA': '0', 'MANGABEIRAS - DESVIO FEIRA DA AV.AFONSO PENA': '1', 'MANGABEIRAS - RETORNO PCA. ENG. FLAVIO GUTIERREZ-H.HILTON ROCHA': '2', 'APARECIDA - RETORNO PCA. ENG. FLAVIO GUTIERREZ-H.HILTON ROCHA': '3', 'MANGABEIRAS - PRINCIPAL': '4', 'APARECIDA - PRINCIPAL': '5', 'APARECIDA - ATENDIMENTO A ASSOCIACAO MINEIRA DE REABILITACAO': '6'}};
+lines['4106'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SAO CRISTOVAO - DESVIO FEIRA DA AV. AFONSO PENA': '0', 'SAO CRISTOVAO - PRINCIPAL': '1'}};
+lines['4107'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'SERRA - DESVIO FEIRA DA AV. AFONSO PENA': '0', 'SERRA - PRINCIPAL': '1', 'ALTO CAICARA - DESVIO FEIRA DA AV. AFONSO PENA': '2', 'ALTO CAICARA - PRINCIPAL': '3', 'SERRA - ATENDIMENTO AOS DOMINGOS E FERIADOS': '4'}};
+lines['4108'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'PEDRO II - DESVIO FEIRA DA AV.AFONSO PENA': '0', 'PEDRO II - PRINCIPAL': '1'}};
+lines['4110'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'BELVEDERE - FACULDADE MILTON CAMPOS/CENTRO': '0', 'DOM CABRAL - PRINCIPAL': '1', 'DOM CABRAL - PARTIDAS DA AV. OLEGARIO MACIEL': '2', 'BELVEDERE - PRINCIPAL': '3'}};
+lines['4111'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ANCHIETA - PRINCIPAL': '0', 'DOM CABRAL - DESVIO FEIRA DA AV.AFONSO PENA/RETORNO PCA PORTO': '1', 'ANCHIETA - DESVIO FEIRA DA AV.AFONSO PENA/AV.BANDEIRANTES': '2', 'DOM CABRAL - DESVIO FEIRA DA AV.AFONSO PENA/AV.BANDEIRANTES': '3', 'DOM CABRAL - RETORNO NA PRACA DO PORTO': '4', 'DOM CABRAL - ATENDIMENTO A ESCOLA GUINARD': '5', 'DOM CABRAL - PRINCIPAL': '6', 'ANCHIETA - ATENDIMENTO A ESCOLA GUINARD': '7'}};
+lines['4113'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'BOM JESUS - ATENDIMENTO A FUNDACAO TORINO': '0', 'BOM JESUS - PRINCIPAL': '1', 'BELVEDERE - BELVEDERE/CENTRO': '2', 'BELVEDERE - PRINCIPAL': '3'}};
+lines['4114'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'BONFIM - PRINCIPAL': '0', 'BONFIM - DESVIO FEIRA DA AV.AFONSO PENA': '1'}};
+lines['4150'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'BH SHOPPING - PRINCIPAL': '0', 'SHOPPING DEL REY - PRINCIPAL': '1'}};
+lines['4201'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ALTO CAICARA - PRINCIPAL': '0', 'NOVA CINTRA - PRINCIPAL': '1'}};
+lines['4205'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SALGADO FILHO - PRINCIPAL': '0', 'ERMELINDA - PRINCIPAL': '1'}};
+lines['4403A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'SERRANO - PRINCIPAL': '0', 'SERRANO - RETORNO EXPRESSO (PORTAS FECHADAS)': '1', 'SERRANO - NOTURNO': '2'}};
+lines['4403C'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'SARANDI - PRINCIPAL': '0'}};
+lines['4403D'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'CONFISCO - ATENDIMENTO AO RESIDENCIAL SARANDI': '0', 'CONFISCO - PRINCIPAL': '1'}};
+lines['4405'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'COQUEIROS - ATEND. HOSPITAIS E RUA ENEIDA': '0', 'COQUEIROS - ATEND. RUA ENEIDA E RETORNO AV.AUGUSTO DE LIMA': '1', 'COQUEIROS - PRINCIPAL': '2'}};
+lines['4410'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'SERRANO - PRINCIPAL': '0'}};
+lines['4501'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SAO PAULO - PRINCIPAL': '0', 'CALIFORNIA II - CALIFORNIA II / CENTRO': '1', 'CALIFORNIA II - PARTIDA INTERMED. CONJ CALIFORNIA I': '2', 'CALIFORNIA II - PRINCIPAL': '3'}};
+lines['4801A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'BOA VISTA - ATENDIMENTO A RUA ARACI E BAIRRO NOVO GLORIA': '0', 'JARDIM FILADELFIA - PRINCIPAL': '1', 'JARDIM FILADELFIA - ATENDIMENTO A RUA ARACI E BAIRRO NOVO GLORIA': '2', 'BOA VISTA - PRINCIPAL': '3'}};
+lines['4802A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'PINDORAMA - INVERSAO DE PC - BAIRRO PINDORAMA': '0', 'BOA VISTA - INVERSAO DE PC - BAIRRO PINDORAMA': '1', 'BOA VISTA - ATENDIMENTO AO JARDIM FILADELFIA': '2', 'PINDORAMA - PRINCIPAL': '3', 'BOA VISTA - PRINCIPAL': '4'}};
+lines['5031'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SUZANA - PRINCIPAL': '0', 'SUZANA - DESVIO FEIRA DA AV.AFONSO PENA': '1'}};
+lines['504'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'SANTA ROSA - PRINCIPAL': '0'}};
+lines['506'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'JARDIM ALVORADA - VIA CASTELO': '0', 'JARDIM ALVORADA - VIA OURO PRETO': '1'}};
+lines['507'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'OURO PRETO - PRINCIPAL': '0', 'SHOPPING DEL REY - PRINCIPAL': '1'}};
+lines['5101'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'CRUZEIRO - PRINCIPAL': '0', 'SUZANA - PRINCIPAL': '1', 'CRUZEIRO - DESVIO FEIRA DA AV.AFONSO PENA': '2', 'SUZANA - DESVIO FEIRA DA AV.AFONSO PENA': '3'}};
+lines['5102'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SANTO ANTONIO - NAO ATENDIMENTO A UFMG': '0', 'UFMG ESCOLA DE BELAS ARTES - RETORNO NA PCA DA LIBERDADE': '1', 'SANTO ANTONIO - PRINCIPAL': '2', 'UFMG ESCOLA DE BELAS ARTES - PRINCIPAL': '3', 'UFMG ESCOLA DE BELAS ARTES - NAO ATENDIMENTO AO CENTRO PEDAGOGICO': '4', 'UFMG ESCOLA DE BELAS ARTES - NAO ATENDIMENTO A UFMG': '5', 'SANTO ANTONIO - ATENDIMENTO AO CNEN - CENTRO / UFMG': '6'}};
+lines['5201'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'DONA CLARA - PRINCIPAL': '0', 'BURITIS - PRINCIPAL': '1', 'DONA CLARA - PARTIDAS DA RUA BOAVENTURA/BURITIS': '2', 'DONA CLARA - PARTIDAS DA RUA CURITIBA/BURITIS': '3', 'BURITIS - BURITIS/CENTRO': '4'}};
+lines['533'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'CASTELO - PRINCIPAL': '0', 'SHOPPING DEL REY - PRINCIPAL': '1'}};
+lines['535'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'SHOPPING DEL REY - PRINCIPAL': '0', 'XANGRILA - PRINCIPAL': '1'}};
+lines['5401'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'DOM CABRAL - PRINCIPAL': '0', 'SAO LUIS - PRINCIPAL': '1'}};
+lines['5502A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'JARDIM VITORIA - PRINCIPAL': '0', 'JARDIM VITORIA - PARTIDAS DA AV. MAGENTA': '1', 'JARDIM VITORIA - DIRETA(ANEL RODOVIARIO/CENTRO/ANEL RODOVIARIO)': '2', 'JARDIM VITORIA - ATENDIMENTO AO BAIRRO VITORIA II': '3', 'JARDIM VITORIA - ATENDIMENTO AO POUSADA SANTO ANTONIO': '4', 'JARDIM VITORIA - ATENDIMENTO NOTURNO (POUSADA STO.ANTONIO/VITORIA)': '5'}};
+lines['5502B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'CAPITAO EDUARDO - RETORNO EXPRESSO (PORTAS FECHADAS)': '0', 'CAPITAO EDUARDO - ATENDIMENTO AO CSESC (PT)': '1', 'CAPITAO EDUARDO - ATENDIMENTO A RUA DAS MANGUEIRAS (MANHA)': '2', 'CAPITAO EDUARDO - PRINCIPAL': '3', 'CAPITAO EDUARDO - ATENDIMENTO A RUA DAS MANGUEIRAS (TARDE)': '4', 'CAPITAO EDUARDO - ATENDIMENTO AO CSESC': '5'}};
+lines['5502C'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'POUSADA SANTO ANTONIO - ATENDIMENTO AO BAIRRO VITORIA-VIA POUSADA (TARDE)': '0', 'POUSADA SANTO ANTONIO - RETORNO EXPRESSO (PORTAS FECHADAS)': '1', 'POUSADA SANTO ANTONIO - ATENDIMENTO AO BAIRRO VITORIA-VIA POUSADA (MANHA)': '2', 'POUSADA SANTO ANTONIO - PRINCIPAL': '3'}};
+lines['5503A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'GOIANIA - ATENDIMENTO NOTURNO': '0', 'GOIANIA - ATENDIMENTO A VILA SAO JORGE': '1', 'GOIANIA - RETORNO NO CENTRO': '2', 'GOIANIA - ATENDIMENTO A ESTACAO JOSE CANDIDO': '3', 'GOIANIA - PRINCIPAL': '4', 'GOIANIA - ATENDIMENTO A VILA S.JORGE/EST.J.CANDIDO(DOM/FER.)': '5'}};
+lines['5503B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'GOIANIA - PRINCIPAL': '0'}};
+lines['5506A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'RIBEIRO DE ABREU - RETORNO EXPRESSO (PORTAS FECHADAS)': '0', 'RIBEIRO DE ABREU - PRINCIPAL': '1'}};
+lines['5506B'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'RIBEIRO DE ABREU - RIBEIRO DE ABREU/CENTRO': '0', 'RIBEIRO DE ABREU - PRINCIPAL': '1'}};
+lines['5506C'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'PAULO VI - ATENDIMENTO AO CONJUNTO RIBEIRO DE ABREU': '0', 'PAULO VI - PARTIDAS DA AV.DO CONTORNO': '1', 'PAULO VI - PRINCIPAL': '2'}};
+lines['5507A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'JARDIM GUANABARA - JARDIM GUANABARA A/CENTRO (RETORNO EXPRESSO)': '0', 'JARDIM GUANABARA - ATENDIMENTO A VILA CLORIS E BAIRRO XODO': '1', 'JARDIM GUANABARA - PRINCIPAL': '2'}};
+lines['5508'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'AARAO REIS - PRINCIPAL': '0'}};
+lines['5513'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'JULIANA - PRINCIPAL': '0', 'JULIANA - ATENDIMENTO AO FREI LEOPOLDO (PICO MANHA)': '1', 'JULIANA - ATENDIMENTO AO FREI LEOPOLDO (PICO TARDE)': '2'}};
+lines['5517'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'MINAS CAIXA - PRINCIPAL': '0', 'MINAS CAIXA - PARTIDAS DA AV.LEONTINO F.ALVES AOS HOSPITAIS': '1', 'MINAS CAIXA - PARTIDAS DA AV. LEONTINO FRANCISCO ALVES / CENTRO': '2', 'MINAS CAIXA - RETORNO NA PRACA DA ESTACAO': '3', 'MINAS CAIXA - MINAS CAIXA/CENTRO COM RETORNO EXPRESSO': '4'}};
+lines['5523A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'PAULO VI - CONJ PAULO VI - CENTRO': '0', 'PAULO VI - VISTA DO SOL-NAZARE/CENTRO': '1', 'PAULO VI - PRINCIPAL': '2', 'PAULO VI - PARTIDAS DA AV.DO CONTORNO': '3', 'PAULO VI - ATENDIMENTO A RUA SAO JACINTO': '4', 'PAULO VI - RETORNO EXPRESSO (PORTAS FECHADAS)': '5', 'PAULO VI - PARTIDA RUA ANTONIO MARIANO DE ABREU': '6'}};
+lines['5534'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'CONJUNTO ZILAH SPOSITO - ATENDIMENTO AO CONJUNTO UBIRAJARA': '0', 'CONJUNTO ZILAH SPOSITO - CONJUNTO ZILAH SPOSITO/RUA DOS GUAICURUS': '1', 'CONJUNTO ZILAH SPOSITO - PRINCIPAL': '2', 'CONJUNTO ZILAH SPOSITO - RUA DOS GUAICURUS/CONJUNTO ZILAH SPOSITO': '3'}};
+lines['60'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'VENDA NOVA - PRINCIPAL': '0', 'VENDA NOVA - VENDA NOVA/CENTRO VIA ESTACAO VILARINHO': '1'}};
+lines['601'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'NOVA YORK - ATENDIMENTO A ANTENA': '0', 'NOVA YORK - PARTIDAS DA ESTACAO VILARINHO - PICO DA TARDE': '1', 'NOVA YORK - RETORNO ESTACAO VILARINHO - PICO DA MANHA': '2', 'NOVA YORK - PRINCIPAL': '3', 'NOVA YORK - NAO ATENDIMENTO A ESTACAO VILARINHO': '4'}};
+lines['6024'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'MARIA HELENA - PRINCIPAL - VIA AV. CRISTIANO MACHADO': '0'}};
+lines['6025'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'MARIA HELENA - PRINCIPAL - VIA AV. ANTONIO CARLOS': '0'}};
+lines['6027'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'MANTIQUEIRA - PRINCIPAL - VIA AV. ANTONIO CARLOS': '0', 'MANTIQUEIRA - PRINCIPAL - VIA AV. CRISTIANO MACHADO': '1'}};
+lines['607'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESPLENDOR - ESTACAO VILARINHO/ESPLENDOR': '0', 'ESPLENDOR - PRINCIPAL': '1', 'ESPLENDOR - RETORNO - ESTACAO VILARINHO': '2', 'ESPLENDOR - ZOOLOGICO - PARTIDAS DO ESPLENDOR': '3'}};
+lines['608'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'NOVA PAMPULHA - PRINCIPAL': '0', 'VENDA NOVA - PRINCIPAL': '1'}};
+lines['609'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SERRA VERDE - PRINCIPAL': '0', 'SERRA VERDE - ATEND.CID.ADMINISTRATIVA SENT.S.VERDE/STA.MONICA': '1', 'SERRA VERDE - ATEND.CID.ADMINISTRATIVA SENT.STA.MONICA/S.VERDE': '2'}};
+lines['62'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - DIRETA-ESTACAO VENDA NOVA/HOSPITAIS (TARDE)': '0', 'ESTACAO VENDA NOVA - RUA PROFESSOR MORAES/ESTACAO VENDA NOVA': '1', 'ESTACAO VENDA NOVA - ESTACAO VENDA NOVA / PARQUE DAS MANGABEIRAS': '2', 'ESTACAO VENDA NOVA - ESTACAO VENDA NOVA/RUA PROFESSOR MORAES': '3', 'ESTACAO VENDA NOVA - ESTACAO VENDA NOVA/HOSPITAIS- RET.EXPRESSO (MANHA)': '4', 'ESTACAO VENDA NOVA - PRINCIPAL': '5', 'ESTACAO VENDA NOVA - ITINERARIO NOTURNO': '6'}};
+lines['621'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - PRINCIPAL': '0', 'ESTACAO VENDA NOVA - PARTIDA DA R. JOSE SABINO MACIEL': '1'}};
+lines['622'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - NOTURNO-ATEND. LAGOINHA E VILA SANTA BRANCA-E.V.N.': '0', 'ESTACAO VENDA NOVA - PRINCIPAL': '1'}};
+lines['623'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - PRINCIPAL': '0', 'ESTACAO VENDA NOVA - ITINERARIO NOTURNO': '1'}};
+lines['624'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - PRINCIPAL': '0', 'ESTACAO VENDA NOVA - ITINERARIO NOTURNO': '1'}};
+lines['625'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - PRINCIPAL': '0', 'ESTACAO VENDA NOVA - ITINERARIO NOTURNO': '1'}};
+lines['626'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - ESTACAO VENDA NOVA/NOVA AMERICA': '0', 'ESTACAO VENDA NOVA - PRINCIPAL': '1', 'ESTACAO VENDA NOVA - ITINERARIO NOTURNO': '2'}};
+lines['627'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - PRINCIPAL': '0', 'ESTACAO VENDA NOVA - ATENDIMENTO AO BAIRRO BONSUCESSO': '1', 'ESTACAO VENDA NOVA - ITINERARIO NOTURNO': '2'}};
+lines['63'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - PRINCIPAL': '0', 'ESTACAO VENDA NOVA - RUA PECANHA/ESTACAO VENDA NOVA': '1', 'ESTACAO VENDA NOVA - RETORNO NO VDT SAO FRANCISCO': '2', 'ESTACAO VENDA NOVA - ESTACAO VENDA NOVA/RUA PECANHA': '3'}};
+lines['630'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - PRINCIPAL': '0'}};
+lines['631'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - ATENDIMENTO AO CANAA': '0', 'ESTACAO VENDA NOVA - PRINCIPAL': '1'}};
+lines['633'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - ATENDIMENTO NOTURNO': '0', 'ESTACAO VENDA NOVA - PRINCIPAL': '1'}};
+lines['634'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VILARINHO - PRINCIPAL': '0', 'ESTACAO VILARINHO - ESTACAO VILARINHO / R.LUCI LELIS': '1'}};
+lines['635'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - PRINCIPAL': '0'}};
+lines['6350'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'ESTACAO BARREIRO - PRINCIPAL': '0'}};
+lines['636'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - PRINCIPAL': '0', 'ESTACAO VENDA NOVA - EST.VENDA NOVA/JARDIM EUROPA VIA CENACULO - PM': '1', 'ESTACAO VENDA NOVA - EST.VENDA NOVA/JARDIM EUROPA VIA CENACULO - PT': '2'}};
+lines['637'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VILARINHO - PRINCIPAL': '0', 'ESTACAO VILARINHO - ATENDIMENTO A CIDADE ADMINISTRATIVA': '1', 'ESTACAO VILARINHO - ESTACAO VILARINHO / R.LUANDA - CANAA': '2', 'ESTACAO VILARINHO - ESTACAO VILARINHO / CANAA VIA MG-010': '3'}};
+lines['638'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VILARINHO - PRINCIPAL': '0', 'ESTACAO VILARINHO - ESTACAO VILARINHO / R. EDGARD TORRES': '1'}};
+lines['639'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'BRAUNAS - PRINCIPAL': '0', 'SHOPPING DEL REY - PRINCIPAL': '1'}};
+lines['64'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - AV.AUGUSTO DE LIMA/ESTACAO VENDA NOVA': '0', 'ESTACAO VENDA NOVA - ESTACAO VENDA NOVA / AV. DOM PEDRO II': '1', 'ESTACAO VENDA NOVA - ESTACAO VENDA NOVA/AV.OLEGARIO MACIEL': '2', 'ESTACAO VENDA NOVA - ESTACAO VENDA NOVA/STO.AGOSTINHO VIA EST.VILARINHO': '3', 'ESTACAO VENDA NOVA - ESTACAO VILARINHO/ZOOLOGICO VIA EST.VENDA NOVA': '4', 'ESTACAO VENDA NOVA - ESTACAO VENDA NOVA / ZOOLOGICO': '5', 'ESTACAO VENDA NOVA - PRINCIPAL': '6', 'ESTACAO VENDA NOVA - DESVIO FEIRA DE AUTOMOVEIS NO MINEIRAO': '7'}};
+lines['640'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VENDA NOVA - PRINCIPAL': '0'}};
+lines['641'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VILARINHO - PRINCIPAL': '0', 'ESTACAO VILARINHO - ESTACAO VILARINHO / R.GUIDO LEAO': '1'}};
+lines['642'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'VENDA NOVA - ATENDIMENTO A CIDADE ADMINISTRATIVA': '0', 'VENDA NOVA - PARTIDAS DA RUA ALVARO LICERIO DA COSTA': '1'}};
+lines['65'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VILARINHO - PRINCIPAL': '0', 'ESTACAO VILARINHO - ESTACAO VILARINHO/PRACA DA ESTACAO': '1', 'ESTACAO VILARINHO - CENTRO/ ESTACAO VILARINHO - PICO MANHA': '2', 'ESTACAO VILARINHO - ATENDIMENTO A CIDADE ADMINISTRATIVA-PICO TARDE': '3', 'ESTACAO VILARINHO - ATENDIMENTO A CIDADE ADMINISTRATIVA-PICO MANHA': '4'}};
+lines['66'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'CIDADE ADMINISTRATIVA - PRINCIPAL': '0', 'CIDADE ADMINISTRATIVA - RUA PROFESSOR MORAES/CID.ADMINISTRATIVA - PM': '1', 'CIDADE ADMINISTRATIVA - CID.ADMINISTRATIVA/RUA PROFESSOR MORAES - PT': '2', 'CIDADE ADMINISTRATIVA - ESTACAO SAO GABRIEL/SAVASSI': '3'}};
+lines['67'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'CIDADE ADMINISTRATIVA - PRINCIPAL': '0', 'CIDADE ADMINISTRATIVA - AV.AUGUSTO DE LIMA/CIDADE ADMINISTRATIVA - PM': '1', 'CIDADE ADMINISTRATIVA - CIDADE ADMINISTRATIVA/AV.OLEGARIO MACIEL - PT': '2'}};
+lines['702'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'XODO-MARIZE - ATENDIMENTO A RUA ALTO GUANDU': '0', 'XODO-MARIZE - PRINCIPAL': '1', 'XODO-MARIZE - ATENDIMENTO A ESTACAO SAO GABRIEL': '2'}};
+lines['703'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'GUARANI - PRINCIPAL': '0'}};
+lines['705'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SAO TOMAZ - PRINCIPAL': '0', 'SAO TOMAZ - ATENDIMENTO NOTURNO': '1'}};
+lines['706'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'HELIOPOLIS - ATENDIMENTO NOTURNO': '0', 'HELIOPOLIS - PRINCIPAL': '1'}};
+lines['707'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'JARDIM GUANABARA - PRINCIPAL': '0'}};
+lines['708'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'FELICIDADE - PRINCIPAL': '0'}};
+lines['709'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'TUPI - PRINCIPAL': '0'}};
+lines['710'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'PROVIDENCIA - PRINCIPAL': '0'}};
+lines['711'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SOLIMOES - PRINCIPAL': '0', 'SOLIMOES - ATENDIMENTO NOTURNO': '1'}};
+lines['713'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'LAJEDO - PRINCIPAL': '0', 'LAJEDO - ATENDIMENTO NOTURNO': '1'}};
+lines['714'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'CASAS POPULARES - PRINCIPAL': '0'}};
+lines['715'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'MONTE AZUL - ATENDIMENTO NOTURNO': '0', 'MONTE AZUL - PRINCIPAL': '1'}};
+lines['716'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'NOVO AARAO REIS - ATENDIMENTO NOTURNO': '0', 'NOVO AARAO REIS - PRINCIPAL': '1'}};
+lines['732'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'CONJUNTO FELICIDADE - PRINCIPAL': '0'}};
+lines['734'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'AARAO REIS - PRINCIPAL': '0'}};
+lines['735'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VILARINHO - PRINCIPAL': '0', 'ESTACAO VILARINHO - ESTACAO VILARINHO / R.TIPUANA': '1'}};
+lines['736'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VILARINHO - PRINCIPAL': '0', 'ESTACAO VILARINHO - ESTACAO VILARINHO / R.MARIA MARTINS': '1'}};
+lines['737'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VILARINHO - PRINCIPAL': '0', 'ESTACAO VILARINHO - ESTACAO VILARINHO / R.AGENOR DE PAULA ESTRELA': '1'}};
+lines['738'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VILARINHO - PRINCIPAL': '0', 'ESTACAO VILARINHO - ESTACAO VILARINHO / R.ATANASIA DOS JARDINS': '1'}};
+lines['739'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VILARINHO - PRINCIPAL': '0', 'ESTACAO VILARINHO - ESTACAO VILARINHO / R.CARNAUBA': '1'}};
+lines['741'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ESTACAO VILARINHO - PRINCIPAL': '0'}};
+lines['80'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'ESTACAO SAO GABRIEL - ATENDIMENTO AO CENTRO/SETOR LESTE': '0', 'ESTACAO SAO GABRIEL - RETORNO TUNEL LAGOINHA/SETOR LESTE': '1'}};
+lines['8001A'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SANTA INES - PRINCIPAL': '0', 'BH SHOPPING - PRINCIPAL': '1', 'SANTA INES - DESVIO FEIRA DA AV.AFONSO PENA': '2', 'BH SHOPPING - DESVIO FEIRA DA AV.AFONSO PENA': '3', 'SANTA INES - RETORNO NA AV.SENHORA DO CARMO(TREVO R.COLOMBIA)': '4'}};
+lines['806'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'VISTA DO SOL - ATENDIMENTO NOTURNO': '0', 'VISTA DO SOL - PARTIDAS DA RUA SANTA SECONDA': '1', 'VISTA DO SOL - PRINCIPAL': '2'}};
+lines['807'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'RIBEIRO DE ABREU - PRINCIPAL': '0', 'RIBEIRO DE ABREU - PARTIDAS DA ESTACAO SAO GABRIEL': '1'}};
+lines['808'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'PAULO VI - PARTIDAS DA RUA WILSON SILVA': '0', 'PAULO VI - PARTIDAS DA RUA DAS ALMAS': '1', 'PAULO VI - PRINCIPAL': '2'}};
+lines['809'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'BELMONTE - PRINCIPAL': '0', 'BELMONTE - ATENDIMENTO NOTURNO': '1'}};
+lines['81'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'ESTACAO SAO GABRIEL - PRINCIPAL': '0'}};
+lines['810'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'PARQUE BELMONTE - PRINCIPAL': '0', 'PARQUE BELMONTE - ATENDIMENTO NOTURNO': '1'}};
+lines['8101'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'ALTO SANTA LUCIA - PRINCIPAL': '0', 'SANTA CRUZ - SANTA CRUZ / CENTRO': '1', 'SANTA CRUZ - PRINCIPAL': '2'}};
+lines['8102'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'UNIAO - PRINCIPAL': '0', 'UNIAO - ATENDIMENTO A PRACA MIGUEL CHQUILOFF': '1', 'CARMO SION - ATENDIMENTO A PRACA MIGUEL CHQUILOFF': '2'}};
+lines['8103'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'NOVA FLORESTA - ATENDIMENTO A PRACA DO SOL': '0', 'SANTA LUCIA - PRINCIPAL': '1', 'NOVA FLORESTA - PRINCIPAL': '2', 'SANTA LUCIA - SANTA LUCIA/CENTRO (RETORNO NA R.DOS TAMOIOS)': '3', 'SANTA LUCIA - ATENDIMENTO NOTURNO': '4', 'NOVA FLORESTA - ATENDIMENTO NOTURNO': '5'}};
+lines['8106'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'BH SHOPPING - DESVIO FEIRA DA AV. AFONSO PENA': '0', 'BH SHOPPING - RETORNO EXPRESSO': '1', 'BH SHOPPING - PRINCIPAL': '2', 'SANTA CRUZ - DESVIO FEIRA DA AV. AFONSO PENA': '3', 'SANTA CRUZ - RETORNO EXPRESSO': '4', 'SANTA CRUZ - PRINCIPAL': '5'}};
+lines['8107'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SAO PEDRO - PRINCIPAL': '0', 'CONCORDIA - PRINCIPAL': '1', 'CONCORDIA - DESVIO FEIRA DA AV. AFONSO PENA': '2'}};
+lines['8108'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'CIDADE NOVA - PRINCIPAL': '0'}};
+lines['811'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'VISTA DO SOL - RETORNO EXPRESSO - PORTAS FECHADAS': '0', 'VISTA DO SOL - PRINCIPAL': '1'}};
+lines['812'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SAO GABRIEL - PRINCIPAL': '0'}};
+lines['8150'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'UNIAO - PRINCIPAL': '0', 'SERRA - PRINCIPAL': '1'}};
+lines['82'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'ESTACAO SAO GABRIEL - PRINCIPAL': '0'}};
+lines['8203'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'RENASCENCA - ATENDIMENTO AO BURITIS II': '0', 'BURITIS - ATENDIMENTO A RUA BORBOREMA': '1', 'RENASCENCA - ATENDIMENTO A RUA BORBOREMA': '2', 'BURITIS - ATENDIMENTO AV.DEPUTADO CRISTOVAM CHIARADIA': '3', 'BURITIS - ATEND.A AV.DEP.CRIST.CHIARADIA/BORBOREMA/BURITIS 2': '4', 'BURITIS - ATENDIMENTO NOTURNO': '5', 'RENASCENCA - ATEND.A AV.DEP.CRIST.CHIARADIA/BORBOREMA/BURITIS 2': '6', 'RENASCENCA - PRINCIPAL': '7', 'BURITIS - PRINCIPAL': '8', 'RENASCENCA - ATENDIMENTO AV.DEPUTADO CRISTOVAM CHIARADIA': '9', 'RENASCENCA - ATENDIMENTO NOTURNO': '10'}};
+lines['8205'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'MARIA GORETTI - DESVIO FEIRA DA AV. SILVA LOBO VIA ALTO BARROCA': '0', 'NOVA GRANADA - PRINCIPAL': '1', 'NOVA GRANADA - ATENDIMENTO AO BAIRRO SAO PAULO': '2', 'MARIA GORETTI - VIA ALTO BARROCA': '3', 'MARIA GORETTI - PRINCIPAL': '4', 'NOVA GRANADA - DESVIO FEIRA DA AV. SILVA LOBO VIA ALTO BARROCA': '5', 'MARIA GORETTI - ATENDIMENTO AO BAIRRO SAO PAULO VIA ALTO BARROCA': '6', 'MARIA GORETTI - ATENDIMENTO AO BAIRRO SAO PAULO': '7', 'NOVA GRANADA - ATENDIMENTO AO BAIRRO SAO PAULO VIA ALTO BARROCA': '8', 'NOVA GRANADA - DESVIO FEIRA DA AV. SILVA LOBO': '9', 'NOVA GRANADA - VIA ALTO BARROCA': '10'}};
+lines['8207'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'MARIA GORETTI - RETORNO EXPRESSO': '0', 'MARIA GORETTI - PRINCIPAL': '1', 'ESTRELA DALVA - PRINCIPAL': '2', 'MARIA GORETTI - PARTIDAS DA RUA BARREIRO GRANDE': '3'}};
+lines['8208'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTORIL - PRINCIPAL': '0', 'SANTA CRUZ - PRINCIPAL': '1'}};
+lines['821'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'ESTACAO JOSE CANDIDO - PRINCIPAL': '0'}};
+lines['822'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'ESTACAO JOSE CANDIDO - PARTIDAS DA RUA PROF. WLADIMIR GOMES': '0', 'ESTACAO JOSE CANDIDO - ATENDIMENTO A AV.MAGENTA - INVERSAO DE ITINERARIO': '1', 'ESTACAO JOSE CANDIDO - PRINCIPAL': '2'}};
+lines['823'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'BAIRRO VITORIA - ATENDIMENTO A ESTACAO JOSE CANDIDO': '0', 'BAIRRO VITORIA - ATENDIMENTO AO BAIRRO VITORIA II': '1', 'BAIRRO VITORIA - PRINCIPAL': '2'}};
+lines['832'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'CAPITAO EDUARDO - ATENDIMENTO A RUA DAS MANGUEIRAS (MANHA)': '0', 'CAPITAO EDUARDO - ATENDIMENTO AO CSESC (PT)': '1', 'CAPITAO EDUARDO - PRINCIPAL': '2', 'CAPITAO EDUARDO - ATENDIMENTO A RUA DAS MANGUEIRAS (TARDE)': '3', 'CAPITAO EDUARDO - ATENDIMENTO AO CSESC': '4'}};
+lines['8350'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'ESTACAO SAO GABRIEL - PRINCIPAL': '0', 'ESTACAO BARREIRO - PRINCIPAL': '1', 'ESTACAO BARREIRO - DIRETA - PCA. MAGNESITA/SHOPPING DEL REY': '2', 'ESTACAO SAO GABRIEL - DIRETA - PCA. MAGNESITA/SHOPPING DEL REY': '3'}};
+lines['836'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'RIBEIRO DE ABREU - PRINCIPAL': '0'}};
+lines['837'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'CONJUNTO RIBEIRO DE ABREU - PRINCIPAL': '0'}};
+lines['83D'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'ESTACAO SAO GABRIEL - PRINCIPAL': '0'}};
+lines['83P'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'ESTACAO SAO GABRIEL - PRINCIPAL': '0'}};
+lines['8401'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'CACHOEIRINHA - PRINCIPAL': '0', 'SAO JOSE - PRINCIPAL': '1', 'SAO JOSE - SAO JOSE / CENTRO': '2'}};
+lines['8405'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'BELA VISTA - PRINCIPAL': '0', 'PALMARES - PRINCIPAL': '1'}};
+lines['8501'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'MARIA GORETTI - PRINCIPAL': '0', 'ENGENHO NOGUEIRA - PRINCIPAL': '1'}};
+lines['8550'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'ESTACAO SAO GABRIEL - PRINCIPAL': '0'}};
+lines['901'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'CIRCULAR - PRINCIPAL': '0', 'CIRCULAR - NAO ATENDIMENTO AO PAM SAGRADA FAMILIA': '1', 'CIRCULAR - RETORNO NO BAIRRO SAGRADA FAMILIA': '2'}};
+lines['9030'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'CASTANHEIRAS - PARTIDAS DA RUA DOS CAETES': '0', 'CASTANHEIRAS - PRINCIPAL': '1'}};
+lines['9031'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'CENTRO - PRINCIPAL': '0'}};
+lines['9032'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'ALTO VERA CRUZ - PRINCIPAL': '0', 'ALTO VERA CRUZ - ATEND. AO CJ.GRANJA DE FREITAS IV VIA R.DINIZ DIAS': '1', 'ALTO VERA CRUZ - ATENDIMENTO AO CONJ GRANJA DE FREITAS IV': '2'}};
+lines['9101'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SANTA LUCIA - ATEND. ALTO STA. LUCIA E DESVIO DA FEIRA AF.PENA': '0', 'SANTA LUCIA - ATENDIMENTO AO ALTO SANTA LUCIA': '1', 'SANTA LUCIA - PRINCIPAL': '2', 'ALTO VERA CRUZ - ATEND. ALTO STA. LUCIA E DESVIO DA FEIRA AF.PENA': '3', 'ALTO VERA CRUZ - PRINCIPAL': '4', 'ALTO VERA CRUZ - ATENDIMENTO AO ALTO SANTA LUCIA': '5'}};
+lines['9103'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SANTA TERESA - PRINCIPAL': '0', 'SANTO ANTONIO - PRINCIPAL': '1'}};
+lines['9104'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SAGRADA FAMILIA - PRINCIPAL': '0', 'LUXEMBURGO - RETORNO EXPRESSO(PORTAS FECHADAS)': '1', 'LUXEMBURGO - PRINCIPAL': '2', 'SAGRADA FAMILIA - RETORNO EXPRESSO(PORTAS FECHADAS)': '3', 'LUXEMBURGO - PONTO FINAL NA RUA GUAICUI': '4', 'SAGRADA FAMILIA - PONTO FINAL NA RUA GUAICUI': '5'}};
+lines['9105'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SION - PRINCIPAL': '0', 'NOVA VISTA - NOVA VISTA / CENTRO': '1', 'NOVA VISTA - PRINCIPAL': '2'}};
+lines['9106'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SAGRADA FAMILIA - DESVIO FEIRA DA AV.AFONSO PENA': '0', 'SERRA - PRINCIPAL': '1', 'SAGRADA FAMILIA - PRINCIPAL': '2'}};
+lines['9201'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'BALEIA - PRINCIPAL': '0', 'NOVA GRANADA - PRINCIPAL': '1', 'NOVA GRANADA - DESVIO FEIRA DA AV. SILVA LOBO': '2', 'BALEIA - DESVIO FEIRA DA AV. SILVA LOBO': '3', 'NOVA GRANADA - ATENDIMENTO A UNIDADE ANTONIO MOURAO GUIMARAES': '4'}};
+lines['9202'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'POMPEIA - DESVIO FEIRA DA AV. AFONSO PENA': '0', 'POMPEIA - PRINCIPAL': '1', 'JARDIM AMERICA - PRINCIPAL': '2'}};
+lines['9204'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'ESTORIL - PRINCIPAL': '0', 'SANTA EFIGENIA - SANTA EFIGENIA / CENTRO': '1', 'SANTA EFIGENIA - PRINCIPAL': '2', 'SANTA EFIGENIA - SANTA EFIGENIA / CENTRO-DESVIO FEIRA DA AV.AF.PENA': '3'}};
+lines['9205'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'NOVA VISTA - ATENDIMENTO AO BAIRRO PATROCINIO': '0', 'NOVA CINTRA - PRINCIPAL': '1', 'NOVA VISTA - PRINCIPAL': '2', 'NOVA CINTRA - ATENDIMENTO AO BAIRRO PATROCINIO': '3'}};
+lines['9206'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'VERA CRUZ - PRINCIPAL': '0', 'BURITIS - PRINCIPAL': '1'}};
+lines['9208'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'TAQUARIL - PRINCIPAL': '0', 'TAQUARIL - TAQUARIL/CENTRO-RETORNO NA RUA DA BAHIA': '1', 'SANTA MARIA - ATENDIMENTO A RUA PADRE FEIJO': '2', 'SANTA MARIA - PRINCIPAL': '3', 'TAQUARIL - NAO ATENDIMENTO A R. ERCILIA SIQUEIRA': '4', 'TAQUARIL - ATENDIMENTO A RUA PADRE FEIJO': '5'}};
+lines['9209'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'GUTIERREZ - PRINCIPAL': '0', 'SAGRADA FAMILIA - PRINCIPAL': '1'}};
+lines['9210'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SANTA TERESA - PRINCIPAL': '0', 'PRADO - PRINCIPAL': '1'}};
+lines['9211'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'HAVAI - PRINCIPAL': '0', 'CAETANO FURQUIM - PRINCIPAL': '1'}};
+lines['9214'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'HAVAI - PRINCIPAL': '0', 'CAETANO FURQUIM - PRINCIPAL': '1', 'HAVAI - HAVAI VIA ALTO HAVAI / CENTRO': '2'}};
+lines['9250'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'CAETANO FURQUIM - PRINCIPAL': '0', 'NOVA CINTRA - RETORNO HOSPITAIS': '1', 'NOVA CINTRA - PRINCIPAL': '2'}};
+lines['9402'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'SANTA INES - PRINCIPAL': '0', 'SANTO ANDRE - PRINCIPAL': '1'}};
+lines['9403'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'CAICARA - ATENDIMENTO A RUA AURELIANO MAGALHAES': '0', 'CAICARA - PRINCIPAL': '1', 'PARAISO - PRINCIPAL': '2', 'CAICARA - DESVIO FEIRA DA AV.AFONSO PENA': '3', 'PARAISO - DESVIO FEIRA DA AV.AFONSO PENA': '4'}};
+lines['9404'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SAO LUCAS - PRINCIPAL': '0', 'NOVA ESPERANCA - PRINCIPAL': '1'}};
+lines['9405'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'MONSENHOR MESSIAS - PRINCIPAL': '0', 'INSTITUTO AGRONOMICO - DESVIO DA RUA FRANCISCO BICALHO': '1', 'INSTITUTO AGRONOMICO - PRINCIPAL': '2', 'MONSENHOR MESSIAS - DESVIO DA RUA FRANCISCO BICALHO': '3'}};
+lines['9407'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'DOM BOSCO - DESVIO FEIRA DA AV.AFONSO PENA/AT. OSMARIO SOARES': '0', 'ALTO VERA CRUZ - ATENDIMENTO A R. OSMARIO SOARES': '1', 'DOM BOSCO - PRINCIPAL': '2', 'DOM BOSCO - ATENDIMENTO A R. OSMARIO SOARES': '3', 'ALTO VERA CRUZ - PRINCIPAL': '4', 'DOM BOSCO - DESVIO FEIRA DA AV.AFONSO PENA': '5'}};
+lines['9408'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'PADRE EUSTAQUIO - DESVIO FEIRA DA AV.AFONSO PENA': '0', 'SANTA EFIGENIA - PRINCIPAL': '1', 'PADRE EUSTAQUIO - PRINCIPAL': '2', 'SANTA EFIGENIA - DESVIO FEIRA DA AV.AFONSO PENA': '3'}};
+lines['9410'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'CORACAO EUCARISTICO - PRINCIPAL': '0', 'SAGRADA FAMILIA - PRINCIPAL': '1'}};
+lines['9411'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SAO JOSE - PRINCIPAL': '0', 'CASA BRANCA - PRINCIPAL': '1'}};
+lines['9412'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'TAQUARIL - PRINCIPAL': '0', 'TAQUARIL - ATENDIMENTO NOTURNO': '1', 'PADRE ESTAQUIO - PRINCIPAL': '2', 'TAQUARIL - DESVIO FEIRA DA AV.AFONSO PENA/ATENDIMENTO NOTURNO': '3', 'PADRE ESTAQUIO - ATENDIMENTO NOTURNO': '4', 'TAQUARIL - DESVIO FEIRA DA AV.AFONSO PENA': '5'}};
+lines['9414'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SANTA INES - ATENDIMENTO A RUA MARLIERIA': '0', 'JOAO PINHEIRO - PRINCIPAL': '1', 'JOAO PINHEIRO - ATENDIMENTO A RUA MARLIERIA': '2', 'SANTA INES - PRINCIPAL': '3', 'JOAO PINHEIRO - ATENDIMENTO AO CALIFORNIA': '4', 'SANTA INES - ATENDIMENTO AO CALIFORNIA': '5'}};
+lines['9501'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SAO LUCAS - DESVIO FEIRA DA AV.AFONSO PENA': '0', 'JARAGUA - DESVIO FEIRA DA AV.AFONSO PENA': '1', 'SAO LUCAS - PRINCIPAL': '2', 'JARAGUA - PRINCIPAL': '3', 'JARAGUA - ATENDIMENTO AO NOVO SAO LUCAS': '4', 'SAO LUCAS - ATENDIMENTO AO NOVO SAO LUCAS': '5'}};
+lines['9502'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SAO GERALDO - ATENDIMENTO DIRETO UFMG': '0', 'SAO GERALDO - ATENDIMENTO AO ZOOLOGICO - VIA MUSEU DE ARTE': '1', 'SAO GERALDO - PRINCIPAL': '2', 'SAO GERALDO - ATENDIMENTO A 4 COMPANHIA': '3', 'SAO FRANCISCO - PRINCIPAL': '4', 'SAO FRANCISCO - ATENDIMENTO A UFMG': '5', 'SAO GERALDO - ATENDIMENTO A UFMG': '6', 'SAO FRANCISCO - ATENDIMENTO AO ZOOLOGICO - VIA MUSEU DE ARTE': '7'}};
+lines['9503'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'TAQUARIL - PRINCIPAL': '0', 'JARAGUA - PRINCIPAL': '1', 'TAQUARIL - DESVIO FEIRA DA AV.AFONSO PENA': '2', 'JARAGUA - DESVIO FEIRA DA AV.AFONSO PENA': '3'}};
+lines['9550'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'SAO FRANCISCO - PRINCIPAL': '0', 'CASA BRANCA - ATENDIMENTO A UFMG': '1', 'CASA BRANCA - PRINCIPAL': '2', 'SAO FRANCISCO - ATENDIMENTO A UFMG': '3'}};
+lines['9801'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'SAUDADE - PRINCIPAL': '0', 'SANTA CRUZ - PRINCIPAL': '1', 'SAUDADE - ATENDIMENTO AO JONAS VEIGA': '2'}};
+lines['9803'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO BHLESTE', 'itinerarios': {'TAQUARIL - PRINCIPAL': '0', 'TAQUARIL - DESVIO FEIRA DA AV. AFONSO PENA': '1', 'PALMARES - PRINCIPAL': '2'}};
+lines['9805'] = {'tarifa': '2,65', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'RENASCENCA - PRINCIPAL': '0', 'RENASCENCA - DESVIO FEIRA DA AV. AFONSO PENA': '1', 'SANTA EFIGENIA - PRINCIPAL': '2', 'SANTA EFIGENIA - DESVIO FEIRA DA AV. AFONSO PENA': '3'}};
+lines['S10'] = {'tarifa': '2,65', 'concessionario': 'None', 'itinerarios': {'BH SHOPPING - PRINCIPAL': '0', 'SAO FRANCISCO - PRINCIPAL': '1', 'SAO FRANCISCO - PC UNICO - DIA UTIL': '2'}};
+lines['S20'] = {'tarifa': '2,65', 'concessionario': 'None', 'itinerarios': {'PALMEIRAS - PALMEIRAS ATE AV. URUGUAI': '0', 'PALMEIRAS - PRINCIPAL': '1'}};
+lines['S21'] = {'tarifa': '2,65', 'concessionario': 'None', 'itinerarios': {'DOM CABRAL - PRINCIPAL': '0'}};
+lines['S22'] = {'tarifa': '2,65', 'concessionario': 'None', 'itinerarios': {'ESTACAO CALAFATE - PRINCIPAL': '0', 'ESTACAO CALAFATE - ESTACAO CALAFATE ATE AV.DOM JOAO VI': '1', 'BURITIS - PARTIDAS DA AV.RAUL MOURAO GUIMARAES': '2'}};
+lines['S31'] = {'tarifa': '1,90', 'concessionario': 'None', 'itinerarios': {'PETROPOLIS - PRINCIPAL': '0'}};
+lines['S32'] = {'tarifa': '1,90', 'concessionario': 'None', 'itinerarios': {'ITAIPU - PRINCIPAL': '0', 'CARDOSO - PRINCIPAL': '1'}};
+lines['S33'] = {'tarifa': '1,90', 'concessionario': 'None', 'itinerarios': {'LINDEIA - PRINCIPAL': '0', 'MILIONARIOS - PARTIDAS DA RUA BETULA': '1'}};
+lines['S41'] = {'tarifa': '2,65', 'concessionario': 'None', 'itinerarios': {'CONJUNTO CALIFORNIA - PRINCIPAL': '0'}};
+lines['S50'] = {'tarifa': '2,65', 'concessionario': 'None', 'itinerarios': {'NOVA VISTA - NAO ATENDIMENTO A UFMG': '0', 'CAICARA - PRINCIPAL': '1', 'CAICARA - NAO ATENDIMENTO A UFMG': '2', 'NOVA VISTA - PRINCIPAL': '3'}};
+lines['S52'] = {'tarifa': '2,65', 'concessionario': 'None', 'itinerarios': {'PAMPULHA - PARTIDAS DA RUA EXPEDICIONARIO ANTONIO ESTEVON': '0', 'PAMPULHA - PRINCIPAL': '1'}};
+lines['S53'] = {'tarifa': '2,65', 'concessionario': 'None', 'itinerarios': {'OURO MINAS - PRINCIPAL': '0', 'CONFISCO - PRINCIPAL': '1'}};
+lines['S54'] = {'tarifa': '2,65', 'concessionario': 'None', 'itinerarios': {'DOM BOSCO - PRINCIPAL VIA CASTELO': '0', 'DOM BOSCO - PRINCIPAL VIA PADRE EUSTAQUIO': '1'}};
+lines['S55'] = {'tarifa': '2,65', 'concessionario': 'None', 'itinerarios': {'SANTA MONICA - PRINCIPAL': '0'}};
+lines['S61'] = {'tarifa': '1,90', 'concessionario': 'None', 'itinerarios': {'LANDI - LANDI/ESTACAO VILARINHO (ENCERRA NA EST.VILARINHO)': '0', 'LANDI - DIRETA LANDI/ESTACAO VILARINHO - PICO TARDE': '1', 'LANDI - PRINCIPAL': '2'}};
+lines['S64'] = {'tarifa': '1,90', 'concessionario': 'None', 'itinerarios': {'VENDA NOVA - PRINCIPAL': '0', 'VENDA NOVA - ATENDIMENTO AO BAIRRO CEU ANIL': '1'}};
+lines['S65'] = {'tarifa': '2,15', 'concessionario': 'None', 'itinerarios': {'SAO BERNARDO - VIA SALAMANCA': '0', 'SAO BERNARDO - PRINCIPAL': '1'}};
+lines['S66'] = {'tarifa': '2,15', 'concessionario': 'None', 'itinerarios': {'TUPI - TUPI/R.PADRE PEDRO PINTO': '0', 'TUPI - PRINCIPAL': '1'}};
+lines['S70'] = {'tarifa': '2,65', 'concessionario': 'None', 'itinerarios': {'CONJ. FELICIDADE - PRINCIPAL': '0', 'CONJ. FELICIDADE - CONJ.FELICIDADE/SHOPPING DEL REY C/RET.EXPRESSO': '1'}};
+lines['S80'] = {'tarifa': '2,65', 'concessionario': 'None', 'itinerarios': {'JARDIM VITORIA - PRINCIPAL': '0', 'CIDADE INDUSTRIAL - PRINCIPAL': '1'}};
+lines['S82'] = {'tarifa': '2,65', 'concessionario': 'None', 'itinerarios': {'MINAS SHOPPING - PRINCIPAL': '0'}};
+lines['S85'] = {'tarifa': '2,15', 'concessionario': 'None', 'itinerarios': {'MINAS SHOPPING - PRINCIPAL': '0'}};
+lines['SC01A'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'BARRO PRETO - PRINCIPAL': '0'}};
+lines['SC01B'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'BARRO PRETO - PRINCIPAL': '0'}};
+lines['SC01R'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'BARRO PRETO - ITINERARIO - TARDE': '0', 'BARRO PRETO - ITINERARIO - MANHA': '1'}};
+lines['SC02A'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SANTA EFIGENIA - PRINCIPAL': '0'}};
+lines['SC02B'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SANTA EFIGENIA - PRINCIPAL': '0', 'SANTA EFIGENIA - DESVIO FEIRA DA AV.AFONSO PENA': '1'}};
+lines['SC03A'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'SANTA EFIGENIA - PRINCIPAL': '0'}};
+lines['SC03B'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO DOM PEDRO II', 'itinerarios': {'SANTA EFIGENIA - PRINCIPAL': '0'}};
+lines['SC04A'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SANTA EFIGENIA - PRINCIPAL': '0'}};
+lines['SC04B'] = {'tarifa': '1,90', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'SANTA EFIGENIA - PRINCIPAL': '0'}};
+lines['SE01'] = {'tarifa': '5,00', 'concessionario': 'CONSORCIO PAMPULHA', 'itinerarios': {'CIDADE ADMINISTRATIVA - PRINCIPAL': '0', 'CIDADE ADMINISTRATIVA - ATENDIMENTO AO AEROPORTO DA PAMPULHA': '1', 'SAVASSI - PRINCIPAL': '2', 'SAVASSI - ATENDIMENTO AO AEROPORTO DA PAMPULHA': '3'}};
+lines['SE02'] = {'tarifa': '4,00', 'concessionario': 'CONSORCIO DEZ', 'itinerarios': {'BURITIS - PRINCIPAL': '0'}};
+
+
+			
+			function draw_route() 
+			{
+				if (layer1 != undefined) {
+					layer1.setMap(null);
+					layer2.setMap(null);
+				}
+			
+				var option = $('#buslines').find(':selected').val();
+				var line = option.split('.')[0];
+				var route = option.split('.')[1];
+
+				layer2 = new google.maps.KmlLayer({
+					url: 'http://aqui.io/onibusBH/kml104/' + line + '_it' + route + '_2.kml'
+				});
+				layer2.setMap(map);
+				
+				layer1 = new google.maps.KmlLayer({
+					url: 'http://aqui.io/onibusBH/kml104/' + line + '_it' + route + '_1.kml'
+				});
+				layer1.setMap(map);
+			}
+
+
+			function searchSel() 
+			{
+				var found = 0;
+				var input = document.getElementById('searchbox').value.toLowerCase(),
+							len = input.length,
+							output = document.getElementById('buslines').options;
+				for(var i = 0; i < output.length; ++i) {
+					if (output[i].text.toLowerCase().slice(0, len) == input) {
+						found = i;
+						tokens = output[i].text.split(' ');
+						if (tokens[tokens.length-1] == 'PRINCIPAL') {
+							output[i].selected = true;
+							draw_route();
+							return;
+						}
+					}
+				}
+				if (input == '')
+					output[i].selected = true;
+			}
+		
+		
+			function fill_lines() 
+			{
+				var options = $('#buslines');
+				$.each(line_codes, function() {
+					var line = this;
+					var routes = lines[line].itinerarios;
+					$.each(Object.keys(routes), function() {
+						var val = line + '.' + routes[this];
+						var text = line + ' - ' + this;
+						options.append($('<option />').val(val).text(text));
+					});
+				});
+			}
+			
+			
+			function random_background()
+			{
+				imgs = ['pca2.jpg'];
+				index = Math.floor(imgs.length * Math.random());
+				$('#bgimage').attr('src', imgs[index]);
+			}
+		
+		
+			function initialize() 
+			{
+				fill_lines();
+				random_background();
+			
+				var bh = new google.maps.LatLng(-19.8885388,-43.9686005);
+				var mapOptions = {
+					zoom: 12,
+					center: bh
+				}
+				map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+				$('#searchbox').val('9502');
+				$('#searchbox').keyup();
+				$('#searchbox').focus();
+				
+				$('#explain').hover(function() {
+					$('#popup').fadeIn('slow');
+				}, function() {
+					$('#popup').fadeOut('slow');
+				});		
+				
+				$('#bgimage').fadeIn('slow');
+			}		
+
+
+			google.maps.event.addDomListener(window, 'load', initialize);
+
+		</script>
+	</head>
+	
+	<body>
+	
+		<div id="background">
+			<img id="bgimage" src="pca.jpg">
+		</div>
+	
+		<div id="wrapper">
+			<div id="header">
+				<div id="title">
+					Itinerários das linhas de ônibus de Belo Horizonte
+				</div>
+				<div id="code">
+					Código da linha: <input type="text" id="searchbox" onkeyup="searchSel()" size="8" style="padding: 1px 3px 1px 3px">
+				</div>
+				<div id="route">
+					Itinerário: <select id="buslines" onchange="draw_route()"></select>
+					<span id="explain">O que são as cores?</span>
+				</div>
+			</div>
+			
+			<div id="map-box">
+				<div id="map-canvas"></div>
+				
+				<div id="popup"> 
+					<div class="wrapper">
+						<div class="text">
+							<p>	Os trechos destacados em <span class="green">verde</span> são aqueles cuja confiança no trajeto reconstruído é alta. As partes em <span style="color: green">verde</span> da rota indicam os trechos das ruas por onde o ônibus passa.
+							</p>
+							<p> As ruas e avenidas destacadas em <span class="orange">laranja</span> são aquelas nas quais o ônibus passa, mas para as quais o sistema não foi capaz de delimitar com confiança o trecho. Isso pode ocorrer por diversos motivos, como alterações na circulação da cidade, inconsistências no itinerário da BHTRANS ou discrepâncias com o banco de dados.
+							</p>
+							<p> É importante ressaltar que podem haver erros. Algumas vezes, trechos em <span class="green">verde</span> podem estar equivocados, e trechos em <span class="orange">laranja</span> podem marcar ruas nas quais o ônibus não passa (há muitas ruas com o mesmo nome espalhadas pela cidade). Em caso de dúvida, observe com atenção o itinerário oficial.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+
+

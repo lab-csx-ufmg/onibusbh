@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document><Folder><name>route1</name>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-44.007677807581693,-19.940828862655827 -44.007622864473952,-19.939533998178149</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-44.007489424900477,-19.936212210485539 -44.007456885811465,-19.935367087884849 -44.00743370008734,-19.934866118818572 -44.007380848839055,-19.933766397577465 -44.007365737771941,-19.933385443782321 -44.007333529076668,-19.932601030629073 -44.007302193545044,-19.932004798538618 -44.007278886205945,-19.931435080603219</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-44.007278886205945,-19.931435080603219 -44.007205359719272,-19.930467048185385 -44.007158168022826,-19.930176886489438 -44.007102582935147,-19.929880896185718 -44.007040318528261,-19.929645215043575 -44.006933830894681,-19.929312714317007 -44.006777470319911,-19.928816782464683 -44.006229354274979,-19.927193577687241 -44.006110563395985,-19.926800661210525 -44.005935398668186,-19.926238495317314 -44.005697071490758,-19.925597561639023 -44.005502384895358,-19.925083617559562 -44.005313370650185,-19.924708375516609 -44.00510479489833,-19.924387407937257 -44.004921520637488,-19.924114913172918 -44.00463831129062,-19.92379858628372 -44.00434250207244,-19.923544522365116</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-44.007622864473952,-19.939533998178149 -44.007569785917525,-19.938420002616926 -44.007525882164423,-19.937413922954192 -44.007489424900477,-19.936212210485539</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-44.007816120565536,-19.944253933456125 -44.007759913005437,-19.942467618437831 -44.007710527210719,-19.941733519183192 -44.007677807581693,-19.940828862655827</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.987356748291432,-19.904407505146363 -43.987506592069387,-19.904515770926608</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.987356748291432,-19.904407505146363 -43.987379165800526,-19.904424977810837 -43.987396912971377,-19.904446037446775 -43.987409597108808,-19.904470501142612 -43.987414412419568,-19.904493655307277 -43.987412852633319,-19.904515960137573 -43.987408963689958,-19.90453292171614</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.930757272546828,-19.876359810581867 -43.930586583737998,-19.876292839173534</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.930586583737998,-19.876292839173534 -43.929097927124715,-19.87569498244499</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.931386984589693,-19.876608274880226 -43.930757272546828,-19.876359810581867</coordinates></LineString>
+  </Placemark>
+</Folder>
+</Document></kml>

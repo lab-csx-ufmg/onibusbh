@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document><Folder><name>route1</name>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.998625087273638,-19.802333446781525 -44.00033595677472,-19.802253603679908</coordinates></LineString>
+  </Placemark>
+</Folder>
+</Document></kml>

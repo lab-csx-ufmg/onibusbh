@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document><Folder><name>route1</name>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.884269257394685,-19.849228763030812 -43.883620320902459,-19.849190721348545</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.88540792008186,-19.849287747280332 -43.884403409084342,-19.849235955619616</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.884403409084342,-19.849235955619616 -43.884269257394685,-19.849228763030812</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.885456419023193,-19.849185005469984 -43.885571709651089,-19.848900967254338 -43.88574175793832,-19.848420803945707 -43.885756494344065,-19.847933978802068 -43.885717302917342,-19.847716473073863 -43.885671231324011,-19.847570923054622 -43.885576202430983,-19.847332290835769 -43.884814405321748,-19.846274349812102</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>6400A014</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <LineString><coordinates>-43.886381568896773,-19.845187206620757 -43.886070574072498,-19.845374882228654 -43.884850648951037,-19.846182401728168</coordinates></LineString>
+  </Placemark>
+</Folder>
+</Document></kml>
